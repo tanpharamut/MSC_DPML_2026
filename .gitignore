@@ -1,0 +1,18 @@
+# ---- ข้อมูลดิบขนาดใหญ่ (เก็บไว้เฉพาะในเครื่อง ไม่ขึ้น GitHub) ----
+# train_data.csv ~96 MB / test_data.csv ~29 MB
+# GitHub เตือนที่ไฟล์เกิน 50 MB และบล็อกที่ 100 MB
+04-homework/hw4-group-k-fold/data/*.csv
+
+# ---- ไฟล์ชั่วคราวของ Python / Jupyter ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ---- ไฟล์ชั่วคราวของระบบปฏิบัติการและ Office ----
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp

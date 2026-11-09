@@ -1,0 +1,1352 @@
+<title>สรุป AI วิชา MSC26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+<style>
+/* Layout: a lecture notebook. Sticky contents rail on the left, one reading column; every topic opens with the original note on ruled paper, then the explanation and a diagram. */
+:root {
+  --paper: #f3f5f2;
+  --sheet: #ffffff;
+  --ink: #17202b;
+  --ink-2: #4b5667;
+  --ink-3: #626c7c;
+  --rule: #d5dbe1;
+  --rule-soft: #e6eaee;
+  --pen: #2448b5;
+  --pen-soft: #e2e8fa;
+  --teal: #0a7660;
+  --teal-soft: #d9efe8;
+  --flag: #b4441a;
+  --flag-soft: #f8e3d8;
+  --marker: #ecf56f;
+  --margin-line: #efc4b4;
+  --grid: rgba(36, 72, 181, .07);
+  --f-display: "Chakra Petch", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans Thai", "Noto Sans Thai", "Leelawadee UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", "IBM Plex Sans Thai", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1217; --sheet: #151a21; --ink: #e4e8ee; --ink-2: #a3adbc; --ink-3: #8a95a5;
+    --rule: #2a323d; --rule-soft: #1e252e; --pen: #91a9ff; --pen-soft: #1c2647;
+    --teal: #52cfae; --teal-soft: #112e27; --flag: #ff9b6e; --flag-soft: #3a2016;
+    --marker: rgba(225, 240, 80, .26); --margin-line: #4a2a20; --grid: rgba(145, 169, 255, .06);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1217; --sheet: #151a21; --ink: #e4e8ee; --ink-2: #a3adbc; --ink-3: #8a95a5;
+  --rule: #2a323d; --rule-soft: #1e252e; --pen: #91a9ff; --pen-soft: #1c2647;
+  --teal: #52cfae; --teal-soft: #112e27; --flag: #ff9b6e; --flag-soft: #3a2016;
+  --marker: rgba(225, 240, 80, .26); --margin-line: #4a2a20; --grid: rgba(145, 169, 255, .06);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; border-radius: 3px; }
+a { color: var(--pen); }
+p, ul, ol { margin: 0; }
+b, strong { font-weight: 600; }
+code {
+  font-family: var(--f-mono); font-size: .86em;
+  background: var(--rule-soft); padding: 1px 6px; border-radius: 3px;
+  overflow-wrap: anywhere;
+}
+mark {
+  color: inherit;
+  background: linear-gradient(to top, var(--marker) 0 60%, transparent 60%);
+  padding: 0 .12em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+
+.wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.masthead .wrap { padding-block: 56px 40px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 13px; letter-spacing: .08em;
+  color: var(--pen); text-transform: uppercase;
+}
+h1 {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(36px, 6vw, 58px); line-height: 1.12;
+  margin: 10px 0 18px; text-wrap: balance;
+}
+.lead { max-width: 62ch; color: var(--ink-2); font-size: 18px; }
+.legend {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px;
+  margin-top: 26px; font-size: 14px; color: var(--ink-2);
+}
+.legend > span { display: inline-flex; align-items: center; gap: 8px; }
+.chip-note {
+  font-size: 12px; line-height: 20px; padding: 0 8px;
+  border: 1px solid var(--rule); border-radius: 3px; color: var(--flag); background: var(--sheet);
+}
+.tag-extra, .tag-slide {
+  display: inline-block; font-size: 12px; line-height: 20px; padding: 0 8px;
+  border-radius: 3px; background: var(--pen-soft); color: var(--pen); font-weight: 500;
+  vertical-align: 2px;
+}
+.tag-slide { background: var(--teal-soft); color: var(--teal); }
+.deck { font-family: var(--f-mono); font-size: 12.5px; color: var(--ink-3); }
+
+/* slide deck summaries */
+.deck-label { font-family: var(--f-mono); font-size: 12.5px; color: var(--teal); letter-spacing: .03em; margin-bottom: -10px; }
+.dk-parts { border-top: 1px solid var(--rule); }
+.dk-row {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 2px 14px;
+  padding: 10px 0; border-bottom: 1px solid var(--rule-soft); font-size: 15.5px;
+}
+.dk-code { font-family: var(--f-mono); font-size: 13px; color: var(--ink-3); padding-top: 2px; }
+.dk-row span { color: var(--ink-2); }
+.keep {
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px;
+  padding: 16px 18px; display: flex; flex-direction: column; gap: 10px;
+}
+.keep-title { font-family: var(--f-mono); font-size: 12.5px; color: var(--flag); letter-spacing: .03em; }
+.keep ol, .keep ul { padding-left: 1.3em; display: grid; gap: 8px; font-size: 15.5px; color: var(--ink-2); }
+.related { font-size: 14.5px; color: var(--ink-3); }
+
+/* ---------- layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 56px;
+  padding-block: 40px 72px;
+}
+main { min-width: 0; max-width: 780px; }
+
+.toc {
+  position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px);
+  align-self: start; max-height: calc(100vh - 48px); overflow: auto;
+  font-size: 14px; padding-bottom: 16px;
+}
+.toc-group {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .06em;
+  color: var(--ink-3); margin: 18px 0 6px 10px;
+}
+.toc-group:first-child { margin-top: 0; }
+.toc ol { list-style: none; padding: 0; display: grid; gap: 1px; }
+.toc a {
+  display: block; padding: 3px 10px; border-radius: 4px;
+  color: var(--ink-2); text-decoration: none; line-height: 1.5;
+}
+.toc a:hover { background: var(--rule-soft); color: var(--ink); }
+.toc a.active { background: var(--pen-soft); color: var(--pen); }
+
+@media (max-width: 920px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-top: 28px; }
+  .toc { position: static; max-height: none; overflow: visible; }
+  .toc ol { display: flex; flex-wrap: wrap; gap: 6px; }
+  .toc a { border: 1px solid var(--rule); border-radius: 999px; padding: 2px 12px; background: var(--sheet); }
+  .toc-group { margin-left: 0; }
+}
+
+/* ---------- parts & sections ---------- */
+.part {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
+  border-top: 2px solid var(--ink); padding-top: 16px; margin: 24px 0 8px;
+}
+.part:first-child { margin-top: 0; }
+.part-no { font-family: var(--f-mono); font-size: 13px; color: var(--pen); letter-spacing: .04em; }
+.part-title { font-family: var(--f-display); font-size: 22px; font-weight: 600; }
+
+section {
+  display: flex; flex-direction: column; gap: 18px;
+  padding-block: 28px 44px; scroll-margin-top: 20px;
+}
+section + section { border-top: 1px solid var(--rule); }
+h2 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: clamp(25px, 3.4vw, 31px); line-height: 1.3; margin: 0; text-wrap: balance;
+}
+h3 {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: 20px; line-height: 1.4; margin: 10px 0 0; text-wrap: balance;
+}
+.prose-list { padding-left: 1.3em; display: grid; gap: 8px; }
+
+/* note on ruled paper */
+.note {
+  position: relative; margin-top: 10px;
+  background-color: var(--sheet);
+  background-image:
+    linear-gradient(90deg, transparent 36px, var(--margin-line) 36px, var(--margin-line) 38px, transparent 38px),
+    repeating-linear-gradient(to bottom, transparent 0 29px, var(--rule-soft) 29px 30px);
+  background-position: 0 0, 0 10px;
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 10px 18px 10px 52px;
+  font-family: var(--f-mono); font-size: 14.5px; line-height: 30px; color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+.note-tag {
+  position: absolute; top: -11px; left: 14px;
+  font-family: var(--f-body); font-size: 12px; line-height: 20px; padding: 0 8px;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 3px; color: var(--flag);
+}
+
+/* figures */
+.fig {
+  margin: 0; min-width: 0;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px;
+  padding: 20px; display: flex; flex-direction: column; gap: 14px;
+}
+.fig figcaption { font-size: 14px; color: var(--ink-3); line-height: 1.65; }
+.fig svg { display: block; width: 100%; height: auto; }
+.scroll-x { overflow-x: auto; min-width: 0; }
+
+.tip {
+  font-size: 15.5px; color: var(--ink-2);
+  padding: 14px 16px; border: 1px dashed var(--rule); border-radius: 6px;
+}
+.take {
+  display: flex; gap: 14px; align-items: baseline;
+  padding-top: 14px; border-top: 1px dashed var(--rule); font-weight: 500;
+}
+.take-label {
+  font-family: var(--f-mono); font-size: 12.5px; color: var(--flag);
+  white-space: nowrap; letter-spacing: .03em;
+}
+
+/* numbered steps (only for real sequences) */
+.steps { list-style: none; padding: 0; display: grid; gap: 12px; counter-reset: st; }
+.steps > li {
+  counter-increment: st;
+  display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; align-items: start;
+}
+.steps > li::before {
+  content: counter(st);
+  width: 26px; height: 26px; margin-top: 2px; border-radius: 50%;
+  border: 1.5px solid var(--pen); color: var(--pen);
+  font-family: var(--f-mono); font-size: 13px; line-height: 23px; text-align: center;
+}
+
+/* ---------- AI fields ---------- */
+.fields { border-top: 1px solid var(--rule); }
+.field {
+  display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 2px 20px;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
+}
+.field-verb { font-family: var(--f-display); font-size: 23px; font-weight: 600; color: var(--pen); line-height: 1.35; }
+.field-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.field-name { font-weight: 600; }
+.field-desc { color: var(--ink-2); }
+.field-eg { font-size: 14.5px; color: var(--ink-3); }
+@media (max-width: 560px) { .field { grid-template-columns: minmax(0, 1fr); } }
+
+/* equation */
+.equation { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.eq-term {
+  display: flex; flex-direction: column; padding: 10px 18px;
+  border: 1.5px solid var(--ink-2); border-radius: 4px; background: var(--sheet);
+}
+.eq-term.result { border-color: var(--pen); background: var(--pen-soft); }
+.eq-term b { font-family: var(--f-display); font-size: 21px; font-weight: 600; line-height: 1.3; }
+.eq-term span { font-size: 13.5px; color: var(--ink-3); }
+.eq-op { font-family: var(--f-mono); font-size: 26px; color: var(--ink-3); }
+
+/* tokens */
+.tok {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.4em; padding: 1px 10px;
+  border: 1.5px solid var(--ink-3); border-radius: 4px; background: var(--sheet);
+  font-family: var(--f-mono); font-size: 15px; line-height: 1.65; white-space: nowrap;
+}
+.tok.mask { border-style: dashed; border-color: var(--pen); color: var(--pen); background: var(--pen-soft); }
+.tok.ctx { border-color: var(--teal); color: var(--teal); background: var(--teal-soft); }
+.tok.out { border-color: var(--pen); background: var(--pen); color: var(--sheet); }
+.arrow { font-family: var(--f-mono); color: var(--ink-3); padding: 0 2px; }
+.io { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .03em; }
+
+.nt-grid { display: grid; gap: 10px; }
+.nt-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+/* pixel mask demo */
+.mask-demo { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.mask-demo .panel { display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--ink-3); }
+.px { display: grid; grid-template-columns: repeat(8, 20px); gap: 2px; }
+.px i { height: 20px; background: var(--pen-soft); border-radius: 1px; }
+.px i.m { background: var(--teal); }
+.px i.g { background: var(--teal-soft); }
+.px i.u { background: var(--flag); border-radius: 50%; }
+.px i.x { background: var(--sheet) repeating-linear-gradient(45deg, var(--ink-3) 0 1.5px, transparent 1.5px 5px); }
+.px i.f { box-shadow: inset 0 0 0 2px var(--pen); }
+
+/* training pipeline */
+.pipeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; list-style: none; padding: 0; }
+.stage {
+  position: relative; display: flex; flex-direction: column; gap: 6px;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 16px;
+}
+.stage:not(:last-child)::after {
+  content: "→"; position: absolute; right: -7px; top: 50%;
+  transform: translate(50%, -50%); font-family: var(--f-mono); color: var(--ink-3);
+  background: var(--paper); line-height: 1; padding: 2px 0;
+}
+.stage-no { font-family: var(--f-mono); font-size: 12px; color: var(--pen); letter-spacing: .04em; }
+.stage h4 { margin: 0; font-family: var(--f-display); font-size: 19px; font-weight: 600; line-height: 1.35; }
+.stage p { font-size: 15px; color: var(--ink-2); line-height: 1.7; }
+@media (max-width: 720px) {
+  .pipeline { grid-template-columns: minmax(0, 1fr); }
+  .stage:not(:last-child)::after {
+    content: "↓"; right: auto; left: 50%; top: auto; bottom: -7px; transform: translate(-50%, 50%); padding: 0 4px;
+  }
+}
+
+/* generative / sft / rag rows */
+.seq { border-top: 1px solid var(--rule); }
+.seq-row {
+  display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 8px 18px;
+  padding: 16px 0; border-bottom: 1px solid var(--rule);
+}
+.seq-label { font-family: var(--f-display); font-weight: 600; font-size: 19px; line-height: 1.5; }
+.seq-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-width: 0; }
+.seq-note { grid-column: 2; font-size: 15px; color: var(--ink-2); }
+.badge-risk {
+  font-size: 12.5px; color: var(--flag); border: 1px solid var(--flag);
+  border-radius: 999px; padding: 0 10px; margin-left: 4px; white-space: nowrap;
+}
+.badge-ok {
+  font-size: 12.5px; color: var(--teal); border: 1px solid var(--teal);
+  border-radius: 999px; padding: 0 10px; margin-left: 4px; white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .seq-row { grid-template-columns: minmax(0, 1fr); }
+  .seq-note { grid-column: auto; }
+}
+
+/* svg shared */
+.sv-t { font-family: var(--f-body); font-size: 13px; fill: var(--ink); }
+.sv-s { font-size: 11.5px; fill: var(--ink-3); }
+.sv-b { font-weight: 600; }
+.sv-m { font-family: var(--f-mono); }
+.sv-disp { font-family: var(--f-display); font-size: 19px; font-weight: 600; }
+.sv-pen-t { fill: var(--pen); }
+.sv-flag-t { fill: var(--flag); }
+.sv-box { fill: var(--sheet); stroke: var(--rule); stroke-width: 1.5; }
+.sv-box-strong { fill: var(--sheet); stroke: var(--ink-3); stroke-width: 1.5; }
+.sv-box-pen { fill: var(--pen-soft); stroke: var(--pen); stroke-width: 1.5; }
+.sv-track { fill: none; stroke: var(--rule); stroke-width: 2.5; }
+.sv-link { fill: none; stroke: var(--ink-3); stroke-width: 1.4; }
+.sv-arrow { fill: var(--ink-3); }
+.sv-center { fill: var(--pen-soft); stroke: var(--pen); stroke-width: 1.5; }
+.sv-dot-soft { fill: var(--ink-3); opacity: .5; }
+.sv-dot-teal { fill: var(--teal); }
+.sv-dot-pen { fill: var(--pen); }
+.sv-dot-flag { fill: var(--flag); }
+.sv-syn { fill: var(--sheet); stroke: var(--flag); stroke-width: 1.6; }
+.sv-dash-pen { fill: none; stroke: var(--pen); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.sv-dash-teal { fill: none; stroke: var(--teal); stroke-width: 1.4; stroke-dasharray: 3 3; }
+.sv-dash-flag { fill: none; stroke: var(--flag); stroke-width: 1.1; stroke-dasharray: 3 3; opacity: .7; }
+.sv-dash-ink { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 6 5; }
+
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--ink-3); }
+.key > span { display: inline-flex; align-items: center; gap: 7px; }
+.sw { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex: none; }
+.sw.sq { border-radius: 2px; width: 14px; }
+
+/* agentic chain */
+.chain { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 8px; }
+.node {
+  display: flex; flex-direction: column; padding: 6px 12px;
+  border: 1.5px solid var(--ink-3); border-radius: 6px; background: var(--sheet); line-height: 1.45;
+}
+.node small { font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3); }
+.node.ctx { border-color: var(--teal); background: var(--teal-soft); }
+.node.ctx small { color: var(--teal); }
+.node.ans { border-color: var(--pen); background: var(--pen); color: var(--sheet); }
+.node.ans small { color: var(--sheet); opacity: .8; }
+.loop {
+  position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  border: 1.5px dashed var(--flag); border-radius: 10px; padding: 20px 12px 12px; margin-top: 8px;
+}
+.loop-label {
+  position: absolute; top: -11px; left: 12px; background: var(--sheet);
+  padding: 0 6px; font-size: 12.5px; line-height: 20px; color: var(--flag);
+}
+
+.unclear {
+  font-size: 15.5px; padding: 16px 18px; border-radius: 6px;
+  background: var(--flag-soft); color: var(--ink); display: flex; flex-direction: column; gap: 6px;
+}
+.unclear strong { color: var(--flag); font-weight: 600; }
+
+/* tables */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--sheet); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { padding: 8px 14px; text-align: left; border-bottom: 1px solid var(--rule-soft); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+thead th { font-weight: 600; }
+.grp th { font-family: var(--f-mono); font-size: 12px; font-weight: 500; letter-spacing: .03em; padding-block: 6px; border-bottom: 1px solid var(--rule); }
+.grp .gx { color: var(--ink-3); }
+.grp .gy { color: var(--pen); background: var(--pen-soft); }
+.grp .gh { color: var(--flag); background: var(--flag-soft); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.mono { font-family: var(--f-mono); font-size: 13.5px; }
+.col-new { background: var(--pen-soft); color: var(--pen); }
+.row-head { color: var(--ink-3); }
+.pick { font-size: 12px; color: var(--teal); border: 1px solid var(--teal); border-radius: 999px; padding: 0 8px; margin-left: 8px; }
+
+/* cross-validation grid */
+.cv {
+  display: grid; min-width: 560px;
+  grid-template-columns: 70px repeat(5, minmax(46px, 1fr)) 8px minmax(78px, 1.3fr) 58px;
+  gap: 4px; font-size: 12.5px;
+}
+.c {
+  padding: 6px 4px; border-radius: 3px; text-align: center;
+  font-family: var(--f-mono); line-height: 1.45;
+}
+.c.hd { color: var(--ink-3); padding-bottom: 2px; }
+.c.lab { text-align: left; font-family: var(--f-body); font-size: 13.5px; color: var(--ink-2); padding-left: 0; }
+.c.tr { background: var(--teal-soft); color: var(--teal); }
+.c.va { background: var(--pen); color: var(--sheet); }
+.c.te { background: var(--flag-soft); color: var(--flag); font-weight: 500; }
+.c.off { background: var(--sheet) repeating-linear-gradient(45deg, var(--rule) 0 1.5px, transparent 1.5px 6px); color: var(--ink-3); }
+.c.sc { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+.c.gap { padding: 0; }
+.c.avg-lab { grid-column: 1 / 9; text-align: right; font-family: var(--f-body); font-size: 13.5px; color: var(--ink-2); border-top: 1px solid var(--rule); }
+.c.avg { border-top: 1px solid var(--rule); font-weight: 500; color: var(--pen); }
+.c.sep { grid-column: 1 / -1; height: 6px; padding: 0; }
+.c.span5 { grid-column: span 5; }
+
+/* dimension cards */
+.dims { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.dim {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: start;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 16px;
+}
+.dim .mini { grid-row: span 3; margin-top: 6px; }
+.dim-dir { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .03em; }
+.dim h4 { margin: 0; font-family: var(--f-display); font-size: 18px; font-weight: 600; line-height: 1.4; }
+.dim p { font-size: 15px; color: var(--ink-2); line-height: 1.7; }
+.mini { display: grid; grid-template-columns: repeat(5, 11px); gap: 3px; }
+.mini i { height: 11px; background: var(--rule); border-radius: 1px; }
+.mini i.gone { background: transparent; box-shadow: inset 0 0 0 1.5px var(--flag); }
+.mini i.new { background: var(--pen); }
+@media (max-width: 640px) { .dims { grid-template-columns: minmax(0, 1fr); } }
+
+/* imbalance */
+.methods { list-style: none; padding: 0; display: grid; gap: 0; counter-reset: me; border-top: 1px solid var(--rule); }
+.methods > li {
+  counter-increment: me; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid var(--rule);
+}
+.methods > li::before {
+  content: counter(me); width: 26px; height: 26px; margin-top: 2px; border-radius: 50%;
+  border: 1.5px solid var(--pen); color: var(--pen);
+  font-family: var(--f-mono); font-size: 13px; line-height: 23px; text-align: center;
+}
+.method-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.method-head b { font-family: var(--f-display); font-size: 18px; }
+.method-body { color: var(--ink-2); font-size: 15.5px; margin-top: 4px; }
+.verdict { font-size: 12.5px; border-radius: 999px; padding: 0 10px; border: 1px solid; line-height: 1.7; }
+.verdict.no { color: var(--flag); border-color: var(--flag); }
+.verdict.mid { color: var(--ink-2); border-color: var(--ink-3); }
+.verdict.yes { color: var(--teal); border-color: var(--teal); }
+
+.formula {
+  font-family: var(--f-mono); font-size: 17px; line-height: 1.6;
+  padding: 14px 18px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px;
+  overflow-x: auto; display: flex; flex-direction: column; gap: 6px;
+}
+.formula span { font-family: var(--f-body); font-size: 14px; color: var(--ink-3); }
+.formula var { font-style: normal; color: var(--pen); }
+
+.panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+.panels h4 { margin: 0 0 6px; font-family: var(--f-display); font-size: 17px; font-weight: 600; }
+.panels h4 span { font-family: var(--f-body); font-weight: 400; font-size: 14px; color: var(--ink-3); }
+@media (max-width: 600px) { .panels { grid-template-columns: minmax(0, 1fr); } }
+
+/* ensemble */
+.ens { display: grid; border-top: 1px solid var(--rule); }
+.ens-item {
+  display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 16px 24px; align-items: start;
+  padding-block: 22px; border-bottom: 1px solid var(--rule);
+}
+.ens-item svg { width: 100%; height: auto; display: block; }
+.ens-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ens-text h3 { margin: 0; }
+.ens-quote { font-family: var(--f-mono); font-size: 13px; color: var(--flag); }
+.ens-text p { color: var(--ink-2); font-size: 15.5px; }
+.ens-meta { font-size: 14px; color: var(--ink-3); }
+@media (max-width: 640px) {
+  .ens-item { grid-template-columns: minmax(0, 1fr); }
+  .ens-item svg { max-width: 340px; }
+}
+
+/* quiz */
+.quiz { counter-reset: q; border-top: 1px solid var(--rule); }
+.quiz details { counter-increment: q; border-bottom: 1px solid var(--rule); }
+.quiz summary {
+  cursor: pointer; list-style: none; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 10px; padding: 13px 0; font-weight: 500;
+}
+.quiz summary::-webkit-details-marker { display: none; }
+.quiz summary::before { content: counter(q, decimal-leading-zero); font-family: var(--f-mono); font-size: 13px; color: var(--pen); padding-top: 4px; }
+.quiz summary::after { content: "ดูคำตอบ"; font-size: 12.5px; color: var(--ink-3); padding-top: 4px; white-space: nowrap; }
+.quiz details[open] summary::after { content: "ซ่อน"; }
+.quiz summary:hover { color: var(--pen); }
+.quiz .ans { padding: 0 0 16px 44px; color: var(--ink-2); font-size: 15.5px; }
+
+footer { border-top: 1px solid var(--rule); }
+footer .wrap { padding-block: 26px 40px; font-size: 13.5px; color: var(--ink-3); }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">MSC26 · Data Preparation for ML and AI</div>
+    <h1>สรุป AI วิชา MSC26</h1>
+    <p class="lead">เรียบเรียงจากที่จดในคาบ ตั้งแต่ภาพรวมของ AI, Generative AI, RAG และ Agent ไปจนถึงขั้นตอนทำงานกับข้อมูล การแบ่ง fold การแก้ข้อมูลไม่สมดุล และ Ensemble ทุกหัวข้อเริ่มจากบรรทัดที่จดไว้จริง แล้วตามด้วยคำอธิบายและภาพประกอบ หัวข้อไหนที่สไลด์ในคาบพูดถึง จะมีกรอบสรุปจากสไลด์ต่อท้ายให้ และช่วงท้ายมีสรุปสไลด์ทั้ง 4 ไฟล์แยกทีละไฟล์</p>
+    <div class="legend">
+      <span><span class="chip-note">จดในคาบ</span> ข้อความจากโน้ตเดิม</span>
+      <span><span class="tag-slide">สไลด์</span> สรุปจากสไลด์ในโฟลเดอร์ MSC26</span>
+      <span><span class="tag-extra">เพิ่มเติม</span> ไม่ได้อยู่ในโน้ตหรือสไลด์ เติมให้เข้าใจครบขึ้น</span>
+      <span><a href="https://claude.ai/artifact/6TWaKEf1BmuSpqFhV1VzCs">คู่มือสไลด์แบบละเอียด →</a></span>
+      <span><mark>คำที่ไฮไลต์</mark> คำสำคัญที่ควรจำ</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="สารบัญ">
+    <p class="toc-group">ภาพรวม AI</p>
+    <ol>
+      <li><a href="#ai">AI คืออะไร</a></li>
+      <li><a href="#ml">ML = Data + Compute</a></li>
+    </ol>
+    <p class="toc-group">Generative AI</p>
+    <ol>
+      <li><a href="#next-token">LLM เรียนรู้ยังไง</a></li>
+      <li><a href="#training">Pre-training → RLHF</a></li>
+      <li><a href="#compare">Generative / SFT / RAG</a></li>
+      <li><a href="#vector">Vector DB และ top-k</a></li>
+      <li><a href="#agentic">Agentic AI</a></li>
+    </ol>
+    <p class="toc-group">งานข้อมูลและโมเดล</p>
+    <ol>
+      <li><a href="#crisp-dm">CRISP-DM</a></li>
+      <li><a href="#folds">การแบ่ง fold</a></li>
+      <li><a href="#dimension">ปรับขนาดข้อมูล</a></li>
+      <li><a href="#occam">Occam's Razor</a></li>
+      <li><a href="#imbalance">Imbalanced data</a></li>
+      <li><a href="#ensemble">Ensemble</a></li>
+    </ol>
+    <p class="toc-group">สรุปสไลด์</p>
+    <ol>
+      <li><a href="#slides">ภาพรวม 4 ไฟล์</a></li>
+      <li><a href="#deck-img1">Image 1 · ภาพดิจิทัล</a></li>
+      <li><a href="#deck-img2">Image 2 · เตรียมภาพ</a></li>
+      <li><a href="#deck-txt1">Text 1 · ข้อความดั้งเดิม</a></li>
+      <li><a href="#deck-txt2">Text 2 · ยุค LLM</a></li>
+    </ol>
+    <p class="toc-group">ท้ายบท</p>
+    <ol>
+      <li><a href="#review">ทบทวนก่อนสอบ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- ================= PART 1 ================= -->
+    <div class="part"><span class="part-no">ช่วงที่ 1</span><span class="part-title">ภาพรวมของ AI</span></div>
+
+    <section id="ai">
+      <h2>AI คืออะไร</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>what is Artificial Intelligence?<br>ใช้ Divide and Conquer<br><br>Artificial Intelligence ประกอบด้วย<br>computer vision (see)<br>machine learning (Learn)<br>NLP (Communicate)<br>Expert system (Decide)<br>Robotics (Work)</div>
+      <p>AI เป็นคำที่กว้างมากจนนิยามในประโยคเดียวได้ยาก อาจารย์จึงใช้หลัก <mark>Divide and Conquer</mark> คือแบ่งเรื่องใหญ่ออกเป็นเรื่องย่อยแล้วดูทีละส่วน วิธีแบ่งคือเทียบกับความสามารถของคน ว่าคนทำอะไรได้บ้างที่เรียกว่าฉลาด แล้ว AI แต่ละสาขาก็เลียนแบบความสามารถนั้นทีละอย่าง</p>
+      <div class="fields">
+        <div class="field">
+          <div class="field-verb">See</div>
+          <div class="field-body">
+            <span class="field-name">Computer Vision</span>
+            <span class="field-desc">ให้คอมพิวเตอร์มองเห็นและเข้าใจภาพหรือวิดีโอ</span>
+            <span class="field-eg">ตัวอย่าง: สแกนใบหน้าปลดล็อกมือถือ, หาจุดผิดปกติในภาพ X-ray</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-verb">Learn</div>
+          <div class="field-body">
+            <span class="field-name">Machine Learning</span>
+            <span class="field-desc">เรียนรู้รูปแบบจากข้อมูล แทนที่คนจะเขียนกฎให้เอง</span>
+            <span class="field-eg">ตัวอย่าง: กรองอีเมลสแปม, ทำนายยอดขายเดือนหน้า</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-verb">Communicate</div>
+          <div class="field-body">
+            <span class="field-name">NLP (Natural Language Processing)</span>
+            <span class="field-desc">เข้าใจและสร้างภาษาของคน ทั้งข้อความและเสียงพูด</span>
+            <span class="field-eg">ตัวอย่าง: แปลภาษา, แชตบอตตอบคำถามลูกค้า</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-verb">Decide</div>
+          <div class="field-body">
+            <span class="field-name">Expert System</span>
+            <span class="field-desc">ตัดสินใจด้วยกฎ if–then ที่ถอดมาจากความรู้ของผู้เชี่ยวชาญ</span>
+            <span class="field-eg">ตัวอย่าง: ระบบช่วยวินิจฉัยโรคเบื้องต้น, ระบบอนุมัติสินเชื่อตามเกณฑ์</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-verb">Work</div>
+          <div class="field-body">
+            <span class="field-name">Robotics</span>
+            <span class="field-desc">ลงมือทำงานในโลกจริงผ่านเครื่องจักร</span>
+            <span class="field-eg">ตัวอย่าง: แขนกลในโรงงาน, หุ่นยนต์ส่งของในโรงพยาบาล</span>
+          </div>
+        </div>
+      </div>
+      <p>สาขาเหล่านี้ไม่ได้แยกขาดจากกัน รถขับเองใช้ Computer Vision มองถนน ใช้ Machine Learning เรียนรู้การขับ และใช้ Robotics ควบคุมพวงมาลัย ส่วน Machine Learning เป็นแกนที่สาขาอื่นยืมไปใช้มากที่สุดในปัจจุบัน</p>
+    </section>
+
+    <section id="ml">
+      <h2>Machine Learning = ข้อมูล + พลังประมวลผล</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Machine Learning (Learn) = Data + Com (ข้อมูล + ความแรงคอม)</div>
+      <div class="equation" role="img" aria-label="Machine Learning เท่ากับ Data บวก Compute">
+        <div class="eq-term result"><b>Machine Learning</b><span>การเรียนรู้ของเครื่อง</span></div>
+        <span class="eq-op">=</span>
+        <div class="eq-term"><b>Data</b><span>ข้อมูล</span></div>
+        <span class="eq-op">+</span>
+        <div class="eq-term"><b>Compute</b><span>ความแรงของคอม (GPU)</span></div>
+      </div>
+      <p>Machine Learning ไม่ได้เขียนกฎให้คอมพิวเตอร์ตรงๆ แต่ให้คอมพิวเตอร์หากฎเองจากตัวอย่าง จึงต้องมีสองอย่างคู่กัน</p>
+      <ul class="prose-list">
+        <li><b>Data</b> ต้องมีตัวอย่างมากพอและหลากหลายพอให้เห็นรูปแบบจริง ถ้าข้อมูลน้อยหรือเอียงไปทางใดทางหนึ่ง โมเดลก็เรียนผิดตาม</li>
+        <li><b>Compute</b> ต้องมีเครื่องแรงพอ โดยเฉพาะ GPU ที่คำนวณกับข้อมูลจำนวนมากได้ในเวลาที่รับได้</li>
+      </ul>
+      <p>AI โตเร็วมากในช่วงสิบกว่าปีหลังก็เพราะสองอย่างนี้มาพร้อมกัน อินเทอร์เน็ตให้ข้อมูลมหาศาล และ GPU ทำให้ train โมเดลขนาดใหญ่ได้จริง</p>
+    </section>
+
+    <!-- ================= PART 2 ================= -->
+    <div class="part"><span class="part-no">ช่วงที่ 2</span><span class="part-title">Generative AI</span></div>
+
+    <section id="next-token">
+      <h2>LLM เรียนรู้ยังไง</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Generative<br>ตอนนี้ LLM เรียนจาก ปิดตัวสุดท้ายไปเรื่อยๆ<br>ปิดรูปภาพได้ด้วย เช่น พวก App gen รูปใน iPhone หรือแอปรูป</div>
+      <p>LLM (Large Language Model) อย่าง ChatGPT หรือ Claude ถูก train ด้วยโจทย์ข้อเดียว คือ <mark>ปิดคำสุดท้ายไว้ แล้วให้ทายว่าคำต่อไปคืออะไร</mark> เรียกว่า next-token prediction โดย token คือหน่วยย่อยของข้อความ ประมาณหนึ่งคำหรือส่วนหนึ่งของคำ</p>
+      <figure class="fig">
+        <div class="nt-grid">
+          <div class="nt-row"><span class="tok">ฉัน</span><span class="tok mask">?</span><span class="arrow">→</span><span class="tok out">ชอบ</span></div>
+          <div class="nt-row"><span class="tok">ฉัน</span><span class="tok">ชอบ</span><span class="tok mask">?</span><span class="arrow">→</span><span class="tok out">กิน</span></div>
+          <div class="nt-row"><span class="tok">ฉัน</span><span class="tok">ชอบ</span><span class="tok">กิน</span><span class="tok mask">?</span><span class="arrow">→</span><span class="tok out">ข้าวมันไก่</span></div>
+        </div>
+        <figcaption>ประโยคเดียวแตกเป็นโจทย์ได้หลายข้อ โดยเลื่อนตำแหน่งที่ปิดไปเรื่อยๆ ตรงกับที่จดว่า "ปิดตัวสุดท้ายไปเรื่อยๆ"</figcaption>
+      </figure>
+      <p>ข้อดีคือไม่ต้องมีคนมานั่งติด label เพราะคำตอบอยู่ในข้อความอยู่แล้ว (เรียกว่า self-supervised learning) จึงเอาข้อความจำนวนมหาศาลมาฝึกได้ เมื่อทายถูกบ่อยพอ โมเดลก็ต้องเข้าใจไวยากรณ์ ความหมาย และความรู้รอบตัวไปด้วย</p>
+      <p>ตอนใช้งานก็ทำแบบเดียวกัน โมเดลทายคำถัดไปหนึ่งคำ ต่อท้ายเข้าไป แล้วทายคำถัดไปอีก วนแบบนี้จนได้คำตอบทั้งย่อหน้า</p>
+      <h3>ใช้กับรูปภาพได้ด้วย</h3>
+      <p>แนวคิดเดียวกันใช้กับภาพได้ คือปิดบางส่วนของภาพแล้วให้โมเดลวาดส่วนที่หายไปให้กลมกลืน ฟีเจอร์ลบคนหรือวัตถุออกจากรูป และแอปสร้างรูปบนมือถือ ใช้หลักเดียวกันนี้ คือทำให้ภาพหายหรือเสียไปบางส่วน แล้วฝึกโมเดลให้สร้างส่วนนั้นกลับมา</p>
+      <figure class="fig">
+        <div class="mask-demo">
+          <div class="panel">
+            <div class="px" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i class="u"></i><i></i>
+              <i></i><i></i><i class="x"></i><i class="x"></i><i class="x"></i><i></i><i></i><i></i>
+              <i></i><i></i><i class="x"></i><i class="x"></i><i class="x"></i><i></i><i></i><i></i>
+              <i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i>
+            </div>
+            <span>ปิดบางส่วนของภาพ</span>
+          </div>
+          <span class="arrow">→</span>
+          <div class="panel">
+            <div class="px" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i class="u"></i><i></i>
+              <i></i><i></i><i class="f"></i><i class="m f"></i><i class="f"></i><i></i><i></i><i></i>
+              <i></i><i></i><i class="m f"></i><i class="m f"></i><i class="m f"></i><i></i><i></i><i></i>
+              <i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i><i class="g"></i>
+            </div>
+            <span>โมเดลเติมส่วนที่หาย (กรอบน้ำเงิน)</span>
+          </div>
+        </div>
+        <figcaption>ภาพจำลอง 8×5 พิกเซล โมเดลดูท้องฟ้าและพื้นรอบๆ แล้วเดาว่าตรงที่ถูกปิดควรเป็นภูเขา</figcaption>
+      </figure>
+    </section>
+
+    <section id="training">
+      <h2>Pre-training → SFT → RLHF</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>pre-training คือ model ที่มีคน train มาให้แล้ว<br>RLHF (Reinforcement learning from human feedback) เป็นการให้คะแนนคำตอบของ AI และเอาคะแนนนั้นมา train ในตอบถูกใจคน</div>
+      <p>LLM ที่เราใช้กันทุกวันผ่านการฝึก 3 ขั้นตามลำดับ</p>
+      <ol class="pipeline">
+        <li class="stage">
+          <span class="stage-no">ขั้น 1</span>
+          <h4>Pretraining</h4>
+          <p>ฝึกทายคำถัดไปจากข้อความจำนวนมหาศาลที่เก็บจากเว็บและหนังสือ ใช้เวลาและเงินมาก ได้ <b>pre-trained model</b> ที่รู้ภาษาและความรู้ทั่วไป เราไม่ต้อง train ขั้นนี้เอง แต่หยิบโมเดลที่มีคน train มาให้แล้วไปใช้ต่อได้เลย</p>
+        </li>
+        <li class="stage">
+          <span class="stage-no">ขั้น 2</span>
+          <h4>Instruction Tuning (SFT)</h4>
+          <p>Supervised Fine-Tuning สอนต่อด้วยตัวอย่างคู่ (instruction, output) เช่น "สรุปข่าวนี้" → บทสรุปที่ดี โมเดลจึงเรียนรู้ว่าต้องทำตามคำสั่ง ไม่ใช่พิมพ์ต่อข้อความไปเรื่อยๆ</p>
+        </li>
+        <li class="stage">
+          <span class="stage-no">ขั้น 3</span>
+          <h4>Preference Alignment (RLHF)</h4>
+          <p>ให้โมเดลตอบคำถามเดียวกันหลายแบบ คนเลือกหรือให้คะแนนว่าแบบไหนดีกว่า แล้วเอาคะแนนนั้นไปฝึกให้โมเดลตอบแบบที่คนชอบบ่อยขึ้น</p>
+        </li>
+      </ol>
+      <p>ผลของ RLHF คือโมเดลตอบตรงคำถามขึ้น สุภาพขึ้น และปฏิเสธเรื่องอันตรายได้ ในทางปฏิบัติจะเอาคะแนนจากคนไปฝึกโมเดลอีกตัวที่เรียกว่า reward model ให้ให้คะแนนแทนคนได้ก่อน แล้วใช้ reward model นั้นฝึก LLM ต่อ เพราะคนให้คะแนนทุกคำตอบไม่ทัน</p>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Text · Class 2 · D0, F1</span><br>สไลด์เรียกสามขั้นนี้ว่า Pretraining → Instruction Tuning → Preference Alignment และชี้ว่าแต่ละขั้นใช้ข้อมูลคนละชุด ขั้นแรกใช้ข้อความจากเว็บ ขั้นสองใช้ชุดคำสั่งกับคำตอบ ขั้นสามใช้ชุดที่คนบอกว่าคำตอบไหนดีกว่า ตัวอย่างในสไลด์ เช่น ถ้าถามวิธียักยอกเงิน คำตอบที่ปฏิเสธต้องได้คะแนนสูงกว่าคำตอบที่สอนวิธีทำ ข้อมูลขั้นสองไม่ต้องเยอะก็ได้ Alpaca ใช้ตัวอย่างที่โมเดลเขียนให้ 52,000 คู่ ส่วน LIMA ใช้ตัวอย่างที่คนคัดมือแค่ 1,000 คู่ สไลด์ยังเตือนว่าคะแนน RLHF มักมาจากแรงงานค่าแรงต่ำในต่างประเทศ อคติของคนให้คะแนนจึงติดเข้าไปในโมเดลได้</div>
+      <div class="take"><span class="take-label">จำสั้นๆ</span><span>Pretraining ให้ความรู้ · SFT สอนวิธีตอบ · RLHF ปรับให้ตอบถูกใจคน</span></div>
+    </section>
+
+    <section id="compare">
+      <h2>Generative, SFT และ RAG ต่างกันตรงไหน</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>generative : t1,t2,t3,t4<br>SFT: before gmr: t1,t2,t3, after gmr: t'1,t'2,t'3 hallucination<br><br>RAG: context: c1,c2 before gmr: t1,t2,t3 after gmr: t'1,t'2,t'3</div>
+      <p>ในโน้ต <code>t</code> คือ token ของข้อความ <code>c</code> คือ context ที่ดึงมาเสริม ส่วน before กับ after คือสิ่งที่ป้อนเข้าโมเดลกับสิ่งที่โมเดลสร้างออกมา <code>t'</code> มีขีดเพราะเป็น token ใหม่ที่โมเดลสร้าง ไม่ใช่ที่เราพิมพ์</p>
+      <div class="seq">
+        <div class="seq-row">
+          <div class="seq-label">Generative</div>
+          <div class="seq-flow"><span class="tok">t1</span><span class="tok">t2</span><span class="tok">t3</span><span class="arrow">→</span><span class="tok out">t4</span></div>
+          <p class="seq-note">ต่อข้อความไปทีละคำ เป็นสิ่งที่ได้จาก pre-training ยังไม่รู้ว่าหน้าที่คือตอบคำถาม</p>
+        </div>
+        <div class="seq-row">
+          <div class="seq-label">SFT</div>
+          <div class="seq-flow"><span class="io">before</span><span class="tok">t1</span><span class="tok">t2</span><span class="tok">t3</span><span class="arrow">→</span><span class="io">after</span><span class="tok out">t'1</span><span class="tok out">t'2</span><span class="tok out">t'3</span><span class="badge-risk">เสี่ยง hallucination</span></div>
+          <p class="seq-note">ตอบเป็นคำตอบได้แล้ว แต่ความรู้มาจากที่จำไว้ในโมเดลเท่านั้น</p>
+        </div>
+        <div class="seq-row">
+          <div class="seq-label">RAG</div>
+          <div class="seq-flow"><span class="io">context</span><span class="tok ctx">c1</span><span class="tok ctx">c2</span><span class="io">before</span><span class="tok">t1</span><span class="tok">t2</span><span class="tok">t3</span><span class="arrow">→</span><span class="io">after</span><span class="tok out">t'1</span><span class="tok out">t'2</span><span class="tok out">t'3</span><span class="badge-ok">อิงเอกสาร</span></div>
+          <p class="seq-note">ค้นเอกสารที่เกี่ยวข้องมาวางไว้หน้าคำถาม แล้วให้โมเดลตอบโดยอ่านจากเอกสารนั้น</p>
+        </div>
+      </div>
+      <p><mark>Hallucination</mark> คืออาการที่โมเดลแต่งคำตอบที่ฟังดูมั่นใจแต่ไม่จริง เกิดเพราะโมเดลถูกฝึกให้ตอบอย่างลื่นไหล ไม่ได้ถูกฝึกให้บอกว่าไม่รู้ ถ้าเรื่องที่ถามไม่อยู่ในความจำ หรือเป็นข้อมูลที่ใหม่กว่าตอน train โมเดลก็ยังเติมคำที่น่าจะเป็นออกมาอยู่ดี</p>
+      <p><mark>RAG</mark> (Retrieval-Augmented Generation) แก้ตรงนี้โดยค้นข้อมูลจริงมาแนบไปกับคำถาม โมเดลจึงตอบจากเอกสารที่เห็นอยู่ตรงหน้า ลด hallucination และบอกแหล่งที่มาได้ เหมาะกับคำถามเรื่องเอกสารภายในองค์กร หรือข้อมูลที่เปลี่ยนบ่อย</p>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Text · Class 2 · F2</span><br>สไลด์นิยาม hallucination ว่าเป็นคำตอบที่ไม่ตรงกับข้อเท็จจริงของโลก และยกงานวิจัยที่พบว่าในงานด้านกฎหมาย LLM hallucinate ได้สูงถึง 88% (Dahl et al., 2024) ทางแก้ที่สไลด์เสนอคือ RAG ซึ่งมีสองส่วน คือ retriever ค้นเอกสาร แล้ว generator (LLM) สร้างคำตอบโดยอิงเอกสารนั้น</div>
+    </section>
+
+    <section id="vector">
+      <h2>RAG ค้นหา context ยังไง</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>context คล้ายๆ vector database<br>top k ตัวที่อยู่ใกล้ที่สุดมาตอบคำถาม ถ้ามีคำถามมาจะถูกแปลงเป็น feature เพื่อมาเทียบใน feature vector DB</div>
+      <ol class="steps">
+        <li><span><b>เตรียมคลังเอกสาร</b> ตัดเอกสารเป็นชิ้นเล็กๆ (chunk) แปลงแต่ละชิ้นเป็นเวกเตอร์ตัวเลข (เรียกว่า embedding หรือ feature vector) แล้วเก็บไว้ใน <mark>vector database</mark></span></li>
+        <li><span><b>แปลงคำถาม</b> พอมีคำถามเข้ามา ก็แปลงคำถามเป็นเวกเตอร์ด้วยวิธีเดียวกัน</span></li>
+        <li><span><b>หาตัวที่ใกล้ที่สุด</b> วัดระยะระหว่างเวกเตอร์คำถามกับทุกชิ้นในคลัง (นิยมใช้ cosine similarity) แล้วเลือก k ชิ้นที่ใกล้ที่สุด เรียกว่า <mark>top-k</mark></span></li>
+        <li><span><b>ส่งให้ LLM</b> เอา top-k ไปเป็น context (c1, c2, …) วางไว้หน้าคำถาม แล้วให้ LLM ตอบ</span></li>
+      </ol>
+      <figure class="fig">
+        <svg viewBox="0 0 560 290" role="img" aria-label="แผนภาพพื้นที่เวกเตอร์ คำถามเรื่องลาป่วยอยู่ใกล้กลุ่มเอกสารเรื่องการลา และดึงเอกสาร 3 ชิ้นที่ใกล้ที่สุดมาเป็น context">
+          <text x="16" y="24" class="sv-t sv-s">พื้นที่เวกเตอร์ (ย่อจากหลายร้อยมิติให้เหลือ 2 มิติ)</text>
+          <!-- salary docs -->
+          <circle cx="390" cy="70" r="6" class="sv-dot-soft"/>
+          <circle cx="430" cy="60" r="6" class="sv-dot-soft"/>
+          <circle cx="455" cy="100" r="6" class="sv-dot-soft"/>
+          <circle cx="410" cy="110" r="6" class="sv-dot-soft"/>
+          <circle cx="475" cy="78" r="6" class="sv-dot-soft"/>
+          <text x="432" y="142" text-anchor="middle" class="sv-t sv-s">เอกสารเรื่องเงินเดือน</text>
+          <!-- insurance docs -->
+          <circle cx="300" cy="205" r="6" class="sv-dot-soft"/>
+          <circle cx="340" cy="232" r="6" class="sv-dot-soft"/>
+          <circle cx="372" cy="210" r="6" class="sv-dot-soft"/>
+          <circle cx="318" cy="246" r="6" class="sv-dot-soft"/>
+          <circle cx="282" cy="232" r="6" class="sv-dot-soft"/>
+          <text x="328" y="276" text-anchor="middle" class="sv-t sv-s">เอกสารเรื่องประกันสุขภาพ</text>
+          <!-- leave docs -->
+          <circle cx="132" cy="96" r="6" class="sv-dot-soft"/>
+          <circle cx="130" cy="150" r="6" class="sv-dot-soft"/>
+          <line x1="172" y1="118" x2="175" y2="92" class="sv-dash-teal"/>
+          <line x1="172" y1="118" x2="160" y2="135" class="sv-dash-teal"/>
+          <line x1="172" y1="118" x2="200" y2="125" class="sv-dash-teal"/>
+          <circle cx="175" cy="92" r="6" class="sv-dot-teal"/>
+          <circle cx="160" cy="135" r="6" class="sv-dot-teal"/>
+          <circle cx="200" cy="125" r="6" class="sv-dot-teal"/>
+          <circle cx="172" cy="118" r="33" class="sv-dash-pen"/>
+          <path transform="translate(172 118)" d="M0,-9 L2.35,-3.24 L8.56,-2.78 L3.8,1.24 L5.29,7.28 L0,4 L-5.29,7.28 L-3.8,1.24 L-8.56,-2.78 L-2.35,-3.24 Z" class="sv-dot-pen"/>
+          <text x="172" y="76" text-anchor="middle" class="sv-t sv-s sv-m sv-pen-t">top-k (k = 3)</text>
+          <text x="216" y="114" class="sv-t sv-pen-t"><tspan class="sv-b">คำถาม:</tspan> ลาป่วยได้กี่วัน?</text>
+          <text x="160" y="186" text-anchor="middle" class="sv-t sv-s">เอกสารเรื่องการลา</text>
+        </svg>
+        <div class="key">
+          <span><span class="sw" style="background:var(--pen)"></span>เวกเตอร์ของคำถาม</span>
+          <span><span class="sw" style="background:var(--teal)"></span>เอกสารที่ถูกดึงมา (top-3)</span>
+          <span><span class="sw" style="background:var(--ink-3);opacity:.5"></span>เอกสารอื่นในคลัง</span>
+        </div>
+        <figcaption>ข้อความที่ความหมายใกล้กัน เวกเตอร์ก็อยู่ใกล้กัน คำถามเรื่องลาป่วยจึงไปตกใกล้กลุ่มเอกสารเรื่องการลา ระบบดึง 3 ชิ้นที่ใกล้ที่สุดไปให้ LLM อ่านก่อนตอบ</figcaption>
+      </figure>
+      <p>ค่า k เป็นตัวเลือกที่ต้องปรับ ถ้า k น้อยไปอาจพลาดข้อมูลสำคัญ ถ้า k มากไปจะดึงเอกสารที่ไม่เกี่ยวมาปน และโมเดลก็ใช้เอกสารจำนวนมากได้ไม่ดีอยู่แล้ว</p>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Text · Class 2 · F2 "chunks are the new documents"</span><br>คลังของ RAG ไม่ได้เก็บเอกสารทั้งก้อน แต่เก็บ chunk ยาวราวไม่กี่ร้อย token ชิ้นเล็กไปจะเสียบริบท (เช่น เหลือแค่ "it was elevated" โดยไม่รู้ว่าอะไรสูง) ชิ้นใหญ่ไปประโยคที่ต้องการจะจมอยู่ในข้อความอื่น วิธีตัดที่นิยมคือตัดที่ย่อหน้าก่อน แล้วตัดที่ประโยค แล้วตัดที่ช่องว่าง โดยให้ชิ้นที่ติดกันซ้อนกันเล็กน้อย ภาษาไทยไม่มีจุดจบประโยคจึงต้องใช้ตัวตัดประโยคภาษาไทย และควรเก็บที่มาของแต่ละชิ้น (เอกสาร หน้า หัวข้อ) ไว้ด้วยเพื่อให้อ้างอิงได้ สไลด์ยังแสดงว่าประสิทธิภาพของ RAG แทบไม่เพิ่มแล้วหลังส่งเอกสารเกิน 10–20 ชิ้น ซึ่งเป็นเหตุผลที่ไม่ควรตั้ง k สูงเกินไป</div>
+    </section>
+
+    <section id="agentic">
+      <h2>Agentic AI</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Agentic -&gt; context1, context2, tool(gen R code), Tool (run code), tool(debug R code), tool (edit R code) , Ans</div>
+      <p>RAG ค้นหนึ่งครั้งแล้วตอบหนึ่งครั้ง ส่วน <mark>Agent</mark> ทำงานหลายขั้นต่อเนื่อง เลือกเรียกใช้เครื่องมือ (tool) เอง ดูผลที่ได้ แล้วตัดสินใจว่าขั้นต่อไปต้องทำอะไร จนกว่างานจะเสร็จ ตัวอย่างในโน้ตคือสั่งให้ AI วิเคราะห์ข้อมูลด้วยภาษา R</p>
+      <figure class="fig">
+        <div class="chain">
+          <div class="node ctx"><small>context 1</small>โจทย์ที่สั่ง</div>
+          <div class="node ctx"><small>context 2</small>ไฟล์ข้อมูล</div>
+          <span class="arrow">→</span>
+          <div class="node"><small>tool · gen R code</small>เขียนโค้ด R</div>
+          <span class="arrow">→</span>
+          <div class="loop">
+            <span class="loop-label">↻ วนจนรันผ่าน</span>
+            <div class="node"><small>tool · run code</small>รันโค้ด</div>
+            <span class="arrow">→</span>
+            <div class="node"><small>tool · debug R code</small>อ่าน error หาสาเหตุ</div>
+            <span class="arrow">→</span>
+            <div class="node"><small>tool · edit R code</small>แก้โค้ด</div>
+          </div>
+          <span class="arrow">→</span>
+          <div class="node ans"><small>Ans</small>คำตอบ</div>
+        </div>
+        <figcaption>แต่ละกล่องคือหนึ่งขั้นที่ agent ตัดสินใจทำเอง กล่องสีเขียวคือ context ที่ได้รับ กล่องเส้นประคือช่วงที่วนซ้ำได้หลายรอบ</figcaption>
+      </figure>
+      <p>จุดสำคัญคือช่วงรัน → debug → แก้ ที่วนซ้ำได้ ถ้ารันแล้วเจอ error agent อ่าน error เอง แก้โค้ดเอง แล้วรันใหม่ คนไม่ต้องคอยก๊อป error ไปถามทีละรอบ</p>
+      <div class="unclear">
+        <strong>บรรทัดที่ตีความไม่ได้</strong>
+        <span>ในโน้ตมีบรรทัด <code>speculating laybcer pairn -&gt; cassical dade</code> ซึ่งอ่านไม่ออกว่าหมายถึงอะไร คำว่า cassical น่าจะเป็น classical ซึ่งตรงกับชื่อสไลด์ Text Class 1 (Classical text pre-processing) และบรรทัดนี้อยู่ระหว่างเรื่อง Agent กับ CRISP-DM จึงน่าจะเป็นช่วงที่อาจารย์เปลี่ยนจากยุค LLM กลับมาที่งานข้อมูลแบบดั้งเดิม ส่วนคำข้างหน้ายังหาในสไลด์ไม่เจอ ถ้าจำได้ว่าคือคำอะไร เติมได้เลย</span>
+      </div>
+    </section>
+
+    <!-- ================= PART 3 ================= -->
+    <div class="part"><span class="part-no">ช่วงที่ 3</span><span class="part-title">ทำงานกับข้อมูลและโมเดล</span></div>
+
+    <section id="crisp-dm">
+      <h2>CRISP-DM: ขั้นตอนทำโปรเจกต์ข้อมูล</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>CRISD-DM<br>Bussiness understanding<br>Data understanding<br>Data preparation<br>Modelling<br>Evaluation<br>Deployment</div>
+      <p>ชื่อเต็มคือ <mark>CRISP-DM</mark> (Cross-Industry Standard Process for Data Mining) เป็นขั้นตอนมาตรฐานที่ใช้กันทั่วไปเวลาทำโปรเจกต์ข้อมูลหรือ ML มี 6 ขั้น และวนซ้ำเป็นรอบได้</p>
+      <figure class="fig">
+        <svg viewBox="30 20 460 395" role="img" aria-label="วงจร CRISP-DM 6 ขั้น เรียงตามเข็มนาฬิกา มีข้อมูลอยู่ตรงกลาง" style="max-width:460px;margin:0 auto">
+          <circle cx="260" cy="215" r="160" class="sv-track"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(340 76.4) rotate(30)"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(420 215) rotate(90)"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(340 353.6) rotate(150)"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(180 353.6) rotate(210)"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(100 215) rotate(270)"/>
+          <path d="M-6,-5 L6,0 L-6,5 Z" class="sv-arrow" transform="translate(180 76.4) rotate(330)"/>
+          <circle cx="260" cy="215" r="44" class="sv-center"/>
+          <text x="260" y="222" text-anchor="middle" class="sv-t sv-disp sv-pen-t">Data</text>
+
+          <rect x="202" y="32" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="260" y="52" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">1</tspan> Business</text>
+          <text x="260" y="68" text-anchor="middle" class="sv-t">understanding</text>
+
+          <rect x="340.6" y="112" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="398.6" y="132" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">2</tspan> Data</text>
+          <text x="398.6" y="148" text-anchor="middle" class="sv-t">understanding</text>
+
+          <rect x="340.6" y="272" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="398.6" y="292" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">3</tspan> Data</text>
+          <text x="398.6" y="308" text-anchor="middle" class="sv-t">preparation</text>
+
+          <rect x="202" y="352" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="260" y="380" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">4</tspan> Modelling</text>
+
+          <rect x="63.4" y="272" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="121.4" y="300" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">5</tspan> Evaluation</text>
+
+          <rect x="63.4" y="112" width="116" height="46" rx="6" class="sv-box-strong"/>
+          <text x="121.4" y="140" text-anchor="middle" class="sv-t"><tspan class="sv-m sv-pen-t">6</tspan> Deployment</text>
+        </svg>
+      </figure>
+      <ol class="steps">
+        <li><span><b>Business understanding</b> ตั้งโจทย์ให้ชัด จะแก้ปัญหาอะไร และวัดความสำเร็จด้วยตัวเลขอะไร</span></li>
+        <li><span><b>Data understanding</b> สำรวจข้อมูลที่มี ดูการกระจาย ค่าที่หายไป และค่าผิดปกติ</span></li>
+        <li><span><b>Data preparation</b> ทำความสะอาด แปลงรูปแบบ เลือกหรือสร้าง feature มักเป็นขั้นที่กินเวลามากที่สุด</span></li>
+        <li><span><b>Modelling</b> เลือกโมเดล train และปรับ hyperparameter</span></li>
+        <li><span><b>Evaluation</b> วัดผลว่าตอบโจทย์ในขั้น 1 จริงไหม ถ้าไม่ผ่านให้กลับไปทบทวนตั้งแต่ขั้น 1</span></li>
+        <li><span><b>Deployment</b> นำไปใช้งานจริง แล้วคอยติดตามว่าผลยังดีอยู่ไหม</span></li>
+      </ol>
+      <p>ในงานจริง ขั้นที่ติดกันมักเดินหน้าถอยหลังกันหลายรอบ เช่น ทำ Modelling แล้วพบว่าต้องกลับไปเตรียมข้อมูลเพิ่ม ส่วนชื่อในโน้ตที่เขียนว่า CRISD-DM ที่ถูกคือ CRISP-DM</p>
+    </section>
+
+    <section id="folds">
+      <h2>การแบ่ง fold ให้ยุติธรรม</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>การแบ่ง fold data<br>disibulition ของ x(ที่ซ่อนอยู่) และ y<br>จำนวน class เท่าๆกัน<br>x คือ path รูป<br>X ที่ซ่อนอยู่คือ Group เช่น ภาพได้จากเครื่องแสกนที่ 1 หรือเพศ อายุคนในภาพ รายละเอียดต่างๆที่ไม่ใช่ y<br><br>การกระจายเหมือนกันทุก fold แยกข้อมูล test ไว้ก่อน 1 ก้อนจะไม่ถูกใช้เลยในการทำ fold<br>ที่เหลือจับมา 1 fold เป็น test ที่เหลือ train และวัดผลกับ test ทำวนไปจนครบทุก fold จากนั้นเอาผลที่ได้มาเฉลี่ย<br>เลือก โมเดลที่ดีสุด และเอาข้อมูลจากทุก fold มา train รอบเดียวและ test กับข้อมูล test ที่แยกไว้</div>
+      <p>การแบ่ง fold คือการแบ่งข้อมูลเป็นหลายก้อนเพื่อ train และวัดผลหลายรอบ (cross-validation) ผลที่ได้จะเชื่อถือได้ก็ต่อเมื่อทุก fold มีหน้าตาเหมือนกัน ตัวอย่างนี้เป็นงานจำแนกภาพทางการแพทย์ ตารางข้อมูลจะมีลักษณะประมาณนี้</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr class="grp"><th class="gx">x · input</th><th class="gy">y · label</th><th class="gh" colspan="3">X ที่ซ่อนอยู่ · group</th></tr>
+            <tr><th>path รูป</th><th>ผล</th><th>เครื่องสแกน</th><th>เพศ</th><th class="num">อายุ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">scans/0001.png</td><td>ปกติ</td><td>เครื่อง 1</td><td>หญิง</td><td class="num">45</td></tr>
+            <tr><td class="mono">scans/0002.png</td><td>ผิดปกติ</td><td>เครื่อง 2</td><td>ชาย</td><td class="num">62</td></tr>
+            <tr><td class="mono">scans/0003.png</td><td>ปกติ</td><td>เครื่อง 1</td><td>ชาย</td><td class="num">38</td></tr>
+            <tr><td class="mono">scans/0004.png</td><td>ผิดปกติ</td><td>เครื่อง 1</td><td>หญิง</td><td class="num">57</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>ต้องคุมอะไรให้เหมือนกันทุก fold</h3>
+      <ul class="prose-list">
+        <li><b>y</b> ทุก fold ต้องมีสัดส่วนแต่ละ class เท่าๆ กัน เช่น ปกติ 80% ผิดปกติ 20% เหมือนกันทุก fold วิธีแบ่งแบบนี้เรียกว่า <mark>stratified</mark></li>
+        <li><b>X ที่ซ่อนอยู่</b> คือข้อมูลประกอบที่ไม่ใช่ input หลักและไม่ใช่ y เช่น เครื่องสแกนที่ใช้ เพศ อายุ ก็ต้องกระจายเท่าๆ กันด้วย ถ้า fold หนึ่งมีแต่ภาพจากเครื่อง 2 คะแนนของ fold นั้นจะสะท้อนความต่างของเครื่องสแกน ไม่ใช่ความเก่งของโมเดล</li>
+      </ul>
+      <h3>ขั้นตอน</h3>
+      <figure class="fig">
+        <div class="scroll-x">
+          <div class="cv" role="img" aria-label="ตาราง 5-fold cross-validation พร้อม test set ที่แยกไว้">
+            <div class="c hd"></div><div class="c hd">Fold 1</div><div class="c hd">Fold 2</div><div class="c hd">Fold 3</div><div class="c hd">Fold 4</div><div class="c hd">Fold 5</div><div class="c gap"></div><div class="c hd">Test set</div><div class="c hd sc">คะแนน</div>
+
+            <div class="c lab">รอบ 1</div><div class="c va">วัดผล</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c gap"></div><div class="c off">ไม่แตะ</div><div class="c sc">0.86</div>
+            <div class="c lab">รอบ 2</div><div class="c tr">train</div><div class="c va">วัดผล</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c gap"></div><div class="c off">ไม่แตะ</div><div class="c sc">0.83</div>
+            <div class="c lab">รอบ 3</div><div class="c tr">train</div><div class="c tr">train</div><div class="c va">วัดผล</div><div class="c tr">train</div><div class="c tr">train</div><div class="c gap"></div><div class="c off">ไม่แตะ</div><div class="c sc">0.88</div>
+            <div class="c lab">รอบ 4</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c va">วัดผล</div><div class="c tr">train</div><div class="c gap"></div><div class="c off">ไม่แตะ</div><div class="c sc">0.85</div>
+            <div class="c lab">รอบ 5</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c tr">train</div><div class="c va">วัดผล</div><div class="c gap"></div><div class="c off">ไม่แตะ</div><div class="c sc">0.84</div>
+
+            <div class="c avg-lab">คะแนนเฉลี่ย 5 รอบ ใช้เทียบเพื่อเลือกโมเดล</div><div class="c sc avg">0.852</div>
+            <div class="c sep"></div>
+
+            <div class="c lab">สุดท้าย</div><div class="c tr span5">train ใหม่ด้วยข้อมูลทุก fold รวมกัน</div><div class="c gap"></div><div class="c te">วัดผลจริง</div><div class="c sc">0.85</div>
+          </div>
+        </div>
+        <div class="key">
+          <span><span class="sw sq" style="background:var(--teal-soft);box-shadow:inset 0 0 0 1px var(--teal)"></span>ใช้ train</span>
+          <span><span class="sw sq" style="background:var(--pen)"></span>ใช้วัดผลในรอบนั้น (validation)</span>
+          <span><span class="sw sq" style="background:var(--flag-soft);box-shadow:inset 0 0 0 1px var(--flag)"></span>test set ที่แยกไว้</span>
+        </div>
+        <figcaption>ตัวอย่าง 5-fold ตัวเลขคะแนนเป็นค่าสมมติ</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><span>แยก <b>test set</b> ออกก่อน 1 ก้อน (เช่น 20% ของข้อมูล) ก้อนนี้ห้ามใช้จนถึงขั้นสุดท้าย</span></li>
+        <li><span>ข้อมูลที่เหลือแบ่งเป็น k fold (ในภาพ k = 5) โดยคุมการกระจายของ y และ X ที่ซ่อนอยู่ให้เท่ากัน</span></li>
+        <li><span>แต่ละรอบใช้ 1 fold วัดผล อีก k − 1 fold ใช้ train วนจนทุก fold ได้เป็นชุดวัดผลครบ</span></li>
+        <li><span>เอาคะแนนทุกรอบมาเฉลี่ย ทำแบบนี้กับทุกโมเดลที่จะเทียบ แล้วเลือกตัวที่คะแนนเฉลี่ยดีที่สุด</span></li>
+        <li><span>Train โมเดลที่เลือกด้วยข้อมูลทุก fold รวมกันรอบเดียว แล้ววัดผลกับ test set ที่แยกไว้ ได้ตัวเลขที่จะรายงานจริง</span></li>
+      </ol>
+      <p>fold ที่ใช้วัดผลในแต่ละรอบ ในโน้ตเรียกว่า test แต่ในตำราและในโค้ดมักเรียกว่า <b>validation</b> เพื่อไม่ให้สับสนกับ test set ก้อนที่แยกไว้ตั้งแต่แรก</p>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Image · Class 2 · E2 "Fit preprocessing on the training split, only"</span><br>ค่าสถิติทุกตัวที่ใช้เตรียมข้อมูล เช่น mean, std, min/max หรือ PCA ต้องคำนวณจากส่วน train เท่านั้น แล้วค่อยเอาค่าเดิมไปใช้กับ validation และ test ถ้าคำนวณจากข้อมูลทั้งหมดก่อนแบ่ง ข้อมูล test จะรั่วเข้าไปใน train ข้อมูลทางการแพทย์ต้องเพิ่มอีกข้อ คือทั้งการแบ่งข้อมูลและการคำนวณค่าสถิติต้องไม่ข้ามเส้นแบ่งระหว่างคนไข้ ภาพของคนไข้คนเดียวกันต้องอยู่ฝั่งเดียวกันเสมอ</div>
+      <div class="tip"><span class="tag-extra">เพิ่มเติม</span> ถ้าภาพของคนไข้คนเดียวกันอยู่ทั้งใน train และ validation โมเดลอาจจำลักษณะเฉพาะของคนนั้นได้ แล้วทายภาพของคนเดิมถูก คะแนนจะสูงเกินจริง ใน scikit-learn ใช้ <code>StratifiedKFold</code> เพื่อคุมสัดส่วน y และ <code>StratifiedGroupKFold</code> เพื่อคุม y พร้อมกับไม่ให้คนเดียวกันแตกไปอยู่หลาย fold ถ้าอยากคุม X ที่ซ่อนอยู่ไปด้วย วิธีง่ายคือรวมเป็นค่าเดียว เช่น <code>ผิดปกติ_เครื่อง2</code> แล้ว stratify ด้วยค่านั้น</div>
+    </section>
+
+    <section id="dimension">
+      <h2>ปรับขนาดข้อมูล 4 ทิศ</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Dimensionality Modidication<br>คอลัมน์เป็น feature<br>แถวเป็น Data point<br>ลดด้าน feature เรียก Dimensionality Reduction<br>เพิ่มด้าน feature เรียก feature engineering<br>ลดด้าน data point เรียก sampling<br>เพิ่มด้าน data point เรียก Data Augmentation</div>
+      <p>มองข้อมูลเป็นตาราง <b>คอลัมน์คือ feature</b> (สิ่งที่วัดได้ของแต่ละตัวอย่าง) และ <b>แถวคือ data point</b> (ตัวอย่างหนึ่งตัว) การปรับข้อมูลทำได้ 4 ทิศ คือเพิ่มหรือลด ในแนวคอลัมน์หรือในแนวแถว</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>คนไข้</th><th class="num">อายุ</th><th class="num">น้ำหนัก (kg)</th><th class="num">ส่วนสูง (cm)</th><th class="num">ความดัน (mmHg)</th><th class="num col-new">BMI · สร้างใหม่</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-head">A</td><td class="num">45</td><td class="num">70</td><td class="num">170</td><td class="num">120</td><td class="num col-new">24.2</td></tr>
+            <tr><td class="row-head">B</td><td class="num">62</td><td class="num">82</td><td class="num">165</td><td class="num">140</td><td class="num col-new">30.1</td></tr>
+            <tr><td class="row-head">C</td><td class="num">38</td><td class="num">55</td><td class="num">158</td><td class="num">110</td><td class="num col-new">22.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:14px;color:var(--ink-3)">แต่ละแถวคือคนไข้ 1 คน แต่ละคอลัมน์คือ feature คอลัมน์ BMI คำนวณจาก น้ำหนัก ÷ (ส่วนสูงเป็นเมตร)² เป็นตัวอย่างของ feature engineering</p>
+      <div class="dims">
+        <div class="dim">
+          <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="gone"></i><i></i><i></i><i></i><i></i><i class="gone"></i><i></i><i></i><i></i><i></i><i class="gone"></i><i></i><i></i><i></i><i></i><i class="gone"></i></div>
+          <span class="dim-dir">ลด · คอลัมน์ (feature)</span>
+          <h4>Dimensionality Reduction</h4>
+          <p>ตัด feature ที่ไม่ช่วย หรือบีบหลาย feature ให้เหลือน้อยลง เช่น PCA ช่วยให้ train เร็วขึ้นและลด overfitting</p>
+        </div>
+        <div class="dim">
+          <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="new"></i><i></i><i></i><i></i><i></i><i class="new"></i><i></i><i></i><i></i><i></i><i class="new"></i><i></i><i></i><i></i><i></i><i class="new"></i></div>
+          <span class="dim-dir">เพิ่ม · คอลัมน์ (feature)</span>
+          <h4>Feature Engineering</h4>
+          <p>สร้าง feature ใหม่จากของเดิมด้วยความรู้ในเรื่องนั้น เช่น BMI จากน้ำหนักและส่วนสูง</p>
+        </div>
+        <div class="dim">
+          <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i></div>
+          <span class="dim-dir">ลด · แถว (data point)</span>
+          <h4>Sampling</h4>
+          <p>เลือกมาใช้บางแถว เช่น สุ่มลดกลุ่มที่มีมากเกินไป หรือใช้ข้อมูลส่วนหนึ่งเพื่อทดลองให้เร็วขึ้น</p>
+        </div>
+        <div class="dim">
+          <div class="mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="new"></i><i class="new"></i><i class="new"></i><i class="new"></i><i class="new"></i></div>
+          <span class="dim-dir">เพิ่ม · แถว (data point)</span>
+          <h4>Data Augmentation</h4>
+          <p>สร้างตัวอย่างใหม่ เช่น หมุน พลิก หรือปรับแสงภาพ หรือสร้างจุดสังเคราะห์ด้วย SMOTE</p>
+        </div>
+      </div>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Image · Class 2 · F1–F2</span><br>สไลด์ไล่ augmentation ของภาพตั้งแต่ พลิกภาพ, random crop และย่อขยาย, ปรับสี (color jitter) ไปจนถึง MixUp และ CutMix ที่ผสมภาพสองภาพเข้าด้วยกัน ภาพทางการแพทย์ยังจำลองสิ่งรบกวนจากเครื่องสแกนได้ด้วย เช่น ghosting, spike noise, ภาพเบลอจากการขยับ หลักที่ต้องจำมีสองข้อ ข้อแรก augmentation ทำเฉพาะตอน train ตอนวัดผลต้องใช้ภาพจริงที่ไม่ได้ดัดแปลง ข้อสอง augmentation ต้องไม่เปลี่ยนความหมายของภาพ สไลด์ยกตัวอย่างว่าการพลิกภาพหัวใจซ้ายเป็นขวาคือการวินิจฉัยโรคใหม่ ไม่ใช่ augmentation</div>
+    </section>
+
+    <section id="occam">
+      <h2>Occam's Razor</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Oceanics Ragger ถ้าผลไม่ต่างกัน เลือกวิธีง่ายกว่าเสมอ</div>
+      <p>ชื่อที่ถูกคือ <mark>Occam's Razor</mark> (มีดโกนของอ็อกคัม) เป็นหลักคิดว่า ถ้าสองวิธีให้ผลพอๆ กัน ให้เลือกวิธีที่ง่ายกว่า โมเดลง่ายเข้าใจง่าย อธิบายผลให้คนอื่นฟังได้ แก้ไขง่าย ใช้ทรัพยากรน้อย และมักไม่ overfit</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>โมเดล</th><th class="num">F1 เฉลี่ย ± SD (5 fold)</th><th class="num">เวลา train</th><th>อธิบายผลได้</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logistic Regression<span class="pick">เลือกตัวนี้</span></td><td class="num">0.91 ± 0.02</td><td class="num">2 วินาที</td><td>ได้ ดูน้ำหนักของแต่ละ feature</td></tr>
+            <tr><td>Deep Neural Network</td><td class="num">0.92 ± 0.03</td><td class="num">40 นาที</td><td>ยาก</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ตัวอย่างสมมติ คะแนนต่างกันแค่ 0.01 ซึ่งน้อยกว่าความแกว่งระหว่าง fold (± 0.02 ถึง 0.03) ถือว่าผลไม่ต่างกัน จึงเลือก Logistic Regression</p>
+    </section>
+
+    <section id="imbalance">
+      <h2>แก้ข้อมูลไม่สมดุล (Imbalanced data)</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>การลากเส้นแบ่งข้อมูลแบบ linear<br>adasyn การสุ่มสร้างข้อมูลให้ใกล้เส้นโมเดลเพื่อให้โมเดลเรียนรู้ข้อมูลที่แยกยากมากขึ้น<br><br>การแก้ Imbalance data<br>1.สุ่มตัดออก under sampling ไม่ทำกัน<br>2. Over sampling สุ่มข้อมูลน้อยเพิ่มเข้าไปทำให้ข้อมูลซ้ำอยู่จุดเดิมน้ำหนักอาจจะดีขึ้น<br>3. Data Augmentation<br><br>SMOTE k nearest neighbors</div>
+      <p>ข้อมูลไม่สมดุลคือกรณีที่ class หนึ่งมีมากกว่าอีก class มากๆ เช่น ภาพปกติ 950 ภาพ ผิดปกติ 50 ภาพ ปัญหาคือโมเดลที่ทายว่าปกติทุกภาพก็ได้ accuracy 95% ทั้งที่จับเคสผิดปกติไม่ได้เลยสักเคส</p>
+      <p>ถ้ามองว่าโมเดลลากเส้นแบ่งสองกลุ่ม (แบบ linear คือเส้นตรง) กลุ่มใหญ่มีจำนวนมากกว่าจึงมีน้ำหนักมากกว่า เส้นจะถูกดันเข้าไปหากลุ่มเล็ก จุดของกลุ่มเล็กที่อยู่ใกล้เส้นจึงถูกทายผิดง่าย</p>
+      <h3>3 วิธีในโน้ต</h3>
+      <ol class="methods">
+        <li>
+          <div>
+            <div class="method-head"><b>Under-sampling</b><span class="verdict no">ไม่นิยม</span></div>
+            <p class="method-body">สุ่มตัดกลุ่มใหญ่ทิ้งให้เหลือเท่ากลุ่มเล็ก ข้อเสียคือทิ้งข้อมูลจริงที่เก็บมาอย่างยากลำบาก จาก 950 ภาพอาจเหลือแค่ 50</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="method-head"><b>Over-sampling</b><span class="verdict mid">ใช้ได้ แต่ระวัง</span></div>
+            <p class="method-body">สุ่มก๊อปจุดของกลุ่มเล็กซ้ำ จุดที่ก๊อปอยู่ตำแหน่งเดิม ไม่ได้ข้อมูลใหม่ แต่เพิ่มน้ำหนักให้กลุ่มเล็ก โมเดลจึงสนใจกลุ่มเล็กมากขึ้น เสี่ยงที่โมเดลจะจำจุดเดิมจน overfit</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <div class="method-head"><b>Data Augmentation</b><span class="verdict yes">นิยม</span></div>
+            <p class="method-body">สร้างตัวอย่างใหม่ที่ไม่ซ้ำของเดิม สำหรับภาพใช้การหมุน พลิก ปรับแสง สำหรับข้อมูลตารางใช้ SMOTE หรือ ADASYN</p>
+          </div>
+        </li>
+      </ol>
+      <h3>SMOTE และ ADASYN</h3>
+      <p><mark>SMOTE</mark> (Synthetic Minority Over-sampling Technique) สร้างจุดใหม่ของกลุ่มเล็กแทนการก๊อป วิธีคือเลือกจุดกลุ่มเล็กมา 1 จุด หาเพื่อนบ้านในกลุ่มเดียวกันที่ใกล้ที่สุด k ตัว (k nearest neighbors) สุ่มเลือกมา 1 ตัว แล้ววางจุดใหม่ไว้ที่ใดที่หนึ่งบนเส้นตรงระหว่างสองจุดนั้น</p>
+      <div class="formula">
+        <div><var>x</var><sub>new</sub> = <var>x</var> + λ · (<var>x</var><sub>nn</sub> − <var>x</var>),&nbsp;&nbsp; 0 ≤ λ ≤ 1</div>
+        <span>x คือจุดกลุ่มเล็กที่เลือก, x<sub>nn</sub> คือเพื่อนบ้านที่สุ่มได้, λ สุ่มระหว่าง 0 ถึง 1 ถ้า λ = 0.5 จุดใหม่จะอยู่กึ่งกลางพอดี</span>
+      </div>
+      <p><mark>ADASYN</mark> (Adaptive Synthetic Sampling) ต่อยอดจาก SMOTE แต่ไม่ได้สร้างเท่ากันทุกจุด จุดกลุ่มเล็กที่มีกลุ่มใหญ่ล้อมอยู่มาก ซึ่งมักอยู่ใกล้เส้นแบ่ง จะได้จุดสังเคราะห์มากกว่า โมเดลจึงได้ฝึกกับบริเวณที่แยกยากมากขึ้น ตรงกับที่จดไว้</p>
+      <figure class="fig">
+        <div class="panels">
+          <div>
+            <h4>SMOTE <span>สร้างกระจายทั่วกลุ่ม</span></h4>
+            <svg viewBox="0 0 300 240" role="img" aria-label="SMOTE สร้างจุดสังเคราะห์กึ่งกลางระหว่างจุดกลุ่มเล็กกับเพื่อนบ้าน กระจายทั่วกลุ่ม">
+              <line x1="40" y1="220" x2="260" y2="20" class="sv-dash-ink"/>
+              <text x="258" y="12" text-anchor="end" class="sv-t sv-s">เส้นแบ่งของโมเดล</text>
+              <text x="12" y="20" class="sv-t sv-s">กลุ่มใหญ่</text>
+              <text x="288" y="232" text-anchor="end" class="sv-t sv-s sv-flag-t">กลุ่มเล็ก</text>
+              <g>
+                <circle cx="50" cy="60" r="4.5" class="sv-dot-soft"/><circle cx="70" cy="100" r="4.5" class="sv-dot-soft"/><circle cx="60" cy="150" r="4.5" class="sv-dot-soft"/><circle cx="90" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="100" cy="90" r="4.5" class="sv-dot-soft"/><circle cx="120" cy="60" r="4.5" class="sv-dot-soft"/><circle cx="130" cy="110" r="4.5" class="sv-dot-soft"/><circle cx="80" cy="130" r="4.5" class="sv-dot-soft"/><circle cx="150" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="170" cy="70" r="4.5" class="sv-dot-soft"/><circle cx="110" cy="140" r="4.5" class="sv-dot-soft"/><circle cx="190" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="60" cy="190" r="4.5" class="sv-dot-soft"/><circle cx="140" cy="95" r="4.5" class="sv-dot-soft"/><circle cx="200" cy="30" r="4.5" class="sv-dot-soft"/><circle cx="40" cy="110" r="4.5" class="sv-dot-soft"/><circle cx="75" cy="165" r="4.5" class="sv-dot-soft"/><circle cx="160" cy="100" r="4.5" class="sv-dot-soft"/><circle cx="230" cy="25" r="4.5" class="sv-dot-soft"/>
+              </g>
+              <line x1="120" y1="178" x2="185" y2="180" class="sv-dash-flag"/>
+              <line x1="170" y1="128" x2="185" y2="180" class="sv-dash-flag"/>
+              <line x1="170" y1="128" x2="225" y2="150" class="sv-dash-flag"/>
+              <line x1="185" y1="180" x2="240" y2="195" class="sv-dash-flag"/>
+              <line x1="225" y1="150" x2="240" y2="195" class="sv-dash-flag"/>
+              <circle cx="152.5" cy="179" r="4" class="sv-syn"/><circle cx="177.5" cy="154" r="4" class="sv-syn"/><circle cx="197.5" cy="139" r="4" class="sv-syn"/><circle cx="212.5" cy="187.5" r="4" class="sv-syn"/><circle cx="232.5" cy="172.5" r="4" class="sv-syn"/>
+              <circle cx="120" cy="178" r="5" class="sv-dot-flag"/><circle cx="170" cy="128" r="5" class="sv-dot-flag"/><circle cx="185" cy="180" r="5" class="sv-dot-flag"/><circle cx="225" cy="150" r="5" class="sv-dot-flag"/><circle cx="240" cy="195" r="5" class="sv-dot-flag"/>
+            </svg>
+          </div>
+          <div>
+            <h4>ADASYN <span>เน้นตรงที่แยกยาก</span></h4>
+            <svg viewBox="0 0 300 240" role="img" aria-label="ADASYN สร้างจุดสังเคราะห์หนาแน่นรอบจุดกลุ่มเล็กที่อยู่ใกล้เส้นแบ่ง">
+              <line x1="40" y1="220" x2="260" y2="20" class="sv-dash-ink"/>
+              <text x="258" y="12" text-anchor="end" class="sv-t sv-s">เส้นแบ่งของโมเดล</text>
+              <text x="12" y="20" class="sv-t sv-s">กลุ่มใหญ่</text>
+              <text x="288" y="232" text-anchor="end" class="sv-t sv-s sv-flag-t">กลุ่มเล็ก</text>
+              <g>
+                <circle cx="50" cy="60" r="4.5" class="sv-dot-soft"/><circle cx="70" cy="100" r="4.5" class="sv-dot-soft"/><circle cx="60" cy="150" r="4.5" class="sv-dot-soft"/><circle cx="90" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="100" cy="90" r="4.5" class="sv-dot-soft"/><circle cx="120" cy="60" r="4.5" class="sv-dot-soft"/><circle cx="130" cy="110" r="4.5" class="sv-dot-soft"/><circle cx="80" cy="130" r="4.5" class="sv-dot-soft"/><circle cx="150" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="170" cy="70" r="4.5" class="sv-dot-soft"/><circle cx="110" cy="140" r="4.5" class="sv-dot-soft"/><circle cx="190" cy="40" r="4.5" class="sv-dot-soft"/><circle cx="60" cy="190" r="4.5" class="sv-dot-soft"/><circle cx="140" cy="95" r="4.5" class="sv-dot-soft"/><circle cx="200" cy="30" r="4.5" class="sv-dot-soft"/><circle cx="40" cy="110" r="4.5" class="sv-dot-soft"/><circle cx="75" cy="165" r="4.5" class="sv-dot-soft"/><circle cx="160" cy="100" r="4.5" class="sv-dot-soft"/><circle cx="230" cy="25" r="4.5" class="sv-dot-soft"/>
+              </g>
+              <line x1="120" y1="178" x2="170" y2="128" class="sv-dash-flag"/>
+              <line x1="120" y1="178" x2="185" y2="180" class="sv-dash-flag"/>
+              <line x1="170" y1="128" x2="185" y2="180" class="sv-dash-flag"/>
+              <line x1="170" y1="128" x2="225" y2="150" class="sv-dash-flag"/>
+              <line x1="225" y1="150" x2="240" y2="195" class="sv-dash-flag"/>
+              <circle cx="135" cy="163" r="4" class="sv-syn"/><circle cx="152.5" cy="145.5" r="4" class="sv-syn"/><circle cx="136.3" cy="178.5" r="4" class="sv-syn"/><circle cx="152.5" cy="179" r="4" class="sv-syn"/><circle cx="174.5" cy="143.6" r="4" class="sv-syn"/><circle cx="186.5" cy="134.6" r="4" class="sv-syn"/><circle cx="232.5" cy="172.5" r="4" class="sv-syn"/>
+              <circle cx="120" cy="178" r="5" class="sv-dot-flag"/><circle cx="170" cy="128" r="5" class="sv-dot-flag"/><circle cx="185" cy="180" r="5" class="sv-dot-flag"/><circle cx="225" cy="150" r="5" class="sv-dot-flag"/><circle cx="240" cy="195" r="5" class="sv-dot-flag"/>
+            </svg>
+          </div>
+        </div>
+        <div class="key">
+          <span><span class="sw" style="background:var(--ink-3);opacity:.5"></span>กลุ่มใหญ่</span>
+          <span><span class="sw" style="background:var(--flag)"></span>กลุ่มเล็ก (ของจริง)</span>
+          <span><span class="sw" style="background:var(--sheet);box-shadow:inset 0 0 0 1.6px var(--flag)"></span>จุดสังเคราะห์</span>
+        </div>
+        <figcaption>ข้อมูลชุดเดียวกัน SMOTE วางจุดใหม่กระจายเท่าๆ กัน ส่วน ADASYN วางจุดใหม่หนาแน่นรอบสองจุดซ้ายที่อยู่ใกล้กลุ่มใหญ่และใกล้เส้นแบ่ง</figcaption>
+      </figure>
+      <div class="tip"><span class="tag-extra">เพิ่มเติม</span> ทำ over-sampling, SMOTE หรือ ADASYN กับส่วน train ของแต่ละ fold เท่านั้น ห้ามทำก่อนแบ่ง fold เพราะจุดสังเคราะห์ที่สร้างจากข้อมูลฝั่ง validation จะรั่วไปอยู่ใน train ทำให้คะแนนสูงเกินจริง เป็นกฎเดียวกับที่สไลด์ Image Class 2 สอนเรื่องการคำนวณค่าสถิติจาก train เท่านั้น</div>
+      <div class="tip"><span class="tag-slide">สไลด์</span> <span class="deck">Text · Class 2 · F1</span><br>สไลด์ให้กฎสำหรับข้อมูลสังเคราะห์ที่ให้ LLM เขียนเพิ่ม ซึ่งใช้กับข้อมูลสังเคราะห์แบบอื่นได้ด้วย คือ ทำเครื่องหมายว่าแถวไหนเป็นข้อมูลสังเคราะห์ จำกัดสัดส่วนไม่ให้มากเกินไป ห้ามใช้วัดผล และเก็บข้อมูลจริงที่คนเขียนไว้ส่วนหนึ่งสำหรับ validation เสมอ</div>
+    </section>
+
+    <section id="ensemble">
+      <h2>Ensemble: รวมหลายโมเดลเป็นหนึ่ง</h2>
+      <div class="note"><span class="note-tag">จดในคาบ</span>Ensemble Method<br>การรวมกัน มี 3 แบบ<br><br>1. Bagging จับมาใส่ถุงรวมกันเลย<br>2. Boosting รวมแบบมีลำดับ<br>3. Stacking ต่อกันเป็นขั้นๆ</div>
+      <p>แนวคิดเดียวกับการถามความเห็นหลายคนแทนการถามคนเดียว โมเดลแต่ละตัวพลาดคนละจุด พอรวมกันความผิดพลาดจึงหักล้างกันไปบางส่วน ผลรวมมักดีกว่าโมเดลเดี่ยวที่ดีที่สุด</p>
+      <div class="ens">
+        <div class="ens-item">
+          <svg viewBox="0 0 300 194" role="img" aria-label="Bagging: แบ่งข้อมูลเป็นสามถุง train โมเดลสามตัวพร้อมกัน แล้วโหวต">
+            <defs><marker id="ah-bag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-arrow"/></marker></defs>
+            <rect x="95" y="6" width="110" height="32" rx="4" class="sv-box-strong"/>
+            <text x="150" y="27" text-anchor="middle" class="sv-t">ข้อมูล train</text>
+            <line x1="150" y1="38" x2="56" y2="68" class="sv-link" marker-end="url(#ah-bag)"/>
+            <line x1="150" y1="38" x2="150" y2="68" class="sv-link" marker-end="url(#ah-bag)"/>
+            <line x1="150" y1="38" x2="244" y2="68" class="sv-link" marker-end="url(#ah-bag)"/>
+            <rect x="12" y="70" width="80" height="46" rx="5" class="sv-box"/>
+            <rect x="110" y="70" width="80" height="46" rx="5" class="sv-box"/>
+            <rect x="208" y="70" width="80" height="46" rx="5" class="sv-box"/>
+            <text x="52" y="89" text-anchor="middle" class="sv-t sv-s">ถุง 1</text><text x="52" y="107" text-anchor="middle" class="sv-t sv-b">M1</text>
+            <text x="150" y="89" text-anchor="middle" class="sv-t sv-s">ถุง 2</text><text x="150" y="107" text-anchor="middle" class="sv-t sv-b">M2</text>
+            <text x="248" y="89" text-anchor="middle" class="sv-t sv-s">ถุง 3</text><text x="248" y="107" text-anchor="middle" class="sv-t sv-b">M3</text>
+            <line x1="52" y1="116" x2="118" y2="148" class="sv-link" marker-end="url(#ah-bag)"/>
+            <line x1="150" y1="116" x2="150" y2="148" class="sv-link" marker-end="url(#ah-bag)"/>
+            <line x1="248" y1="116" x2="182" y2="148" class="sv-link" marker-end="url(#ah-bag)"/>
+            <rect x="85" y="150" width="130" height="36" rx="5" class="sv-box-pen"/>
+            <text x="150" y="173" text-anchor="middle" class="sv-t sv-pen-t sv-b">โหวต / เฉลี่ย</text>
+          </svg>
+          <div class="ens-text">
+            <h3>Bagging</h3>
+            <span class="ens-quote">"จับมาใส่ถุงรวมกันเลย"</span>
+            <p>ชื่อเต็มคือ Bootstrap Aggregating สุ่มข้อมูลแบบหยิบแล้วใส่คืน (bootstrap) ออกมาหลายถุง แต่ละถุง train โมเดลแยกกันพร้อมกัน แล้วรวมผลด้วยการโหวต (classification) หรือเฉลี่ย (regression) ช่วยให้ผลไม่แกว่งตามข้อมูล (ลด variance)</p>
+            <span class="ens-meta">ตัวอย่าง: Random Forest</span>
+          </div>
+        </div>
+        <div class="ens-item">
+          <svg viewBox="0 0 300 194" role="img" aria-label="Boosting: train โมเดลทีละตัวต่อกัน ตัวหลังแก้ข้อผิดของตัวก่อน แล้วรวมแบบถ่วงน้ำหนัก">
+            <defs><marker id="ah-boost" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-arrow"/></marker></defs>
+            <text x="150" y="24" text-anchor="middle" class="sv-t sv-s">train ทีละตัว ต่อกันเป็นลำดับ</text>
+            <rect x="12" y="40" width="80" height="50" rx="5" class="sv-box"/>
+            <rect x="110" y="40" width="80" height="50" rx="5" class="sv-box"/>
+            <rect x="208" y="40" width="80" height="50" rx="5" class="sv-box"/>
+            <text x="52" y="61" text-anchor="middle" class="sv-t sv-b">M1</text><text x="52" y="79" text-anchor="middle" class="sv-t sv-s">ตัวแรก</text>
+            <text x="150" y="61" text-anchor="middle" class="sv-t sv-b">M2</text><text x="150" y="79" text-anchor="middle" class="sv-t sv-s">แก้ที่ M1 ผิด</text>
+            <text x="248" y="61" text-anchor="middle" class="sv-t sv-b">M3</text><text x="248" y="79" text-anchor="middle" class="sv-t sv-s">แก้ที่ M2 ผิด</text>
+            <line x1="92" y1="65" x2="108" y2="65" class="sv-link" marker-end="url(#ah-boost)"/>
+            <line x1="190" y1="65" x2="206" y2="65" class="sv-link" marker-end="url(#ah-boost)"/>
+            <line x1="52" y1="90" x2="116" y2="148" class="sv-link" marker-end="url(#ah-boost)"/>
+            <line x1="150" y1="90" x2="150" y2="148" class="sv-link" marker-end="url(#ah-boost)"/>
+            <line x1="248" y1="90" x2="184" y2="148" class="sv-link" marker-end="url(#ah-boost)"/>
+            <text x="76" y="124" text-anchor="end" class="sv-t sv-s sv-m">w1</text>
+            <text x="156" y="124" class="sv-t sv-s sv-m">w2</text>
+            <text x="224" y="124" class="sv-t sv-s sv-m">w3</text>
+            <rect x="70" y="150" width="160" height="36" rx="5" class="sv-box-pen"/>
+            <text x="150" y="173" text-anchor="middle" class="sv-t sv-pen-t sv-b">รวมแบบถ่วงน้ำหนัก</text>
+          </svg>
+          <div class="ens-text">
+            <h3>Boosting</h3>
+            <span class="ens-quote">"รวมแบบมีลำดับ"</span>
+            <p>train ทีละตัวต่อกัน ตัวถัดไปให้ความสำคัญกับข้อที่ตัวก่อนหน้าทายผิด แล้วรวมผลแบบถ่วงน้ำหนัก ตัวที่แม่นกว่าได้น้ำหนักมากกว่า ช่วยให้โมเดลจับรูปแบบที่ซับซ้อนได้ดีขึ้น (ลด bias)</p>
+            <span class="ens-meta">ตัวอย่าง: AdaBoost, Gradient Boosting, XGBoost</span>
+          </div>
+        </div>
+        <div class="ens-item">
+          <svg viewBox="0 0 300 194" role="img" aria-label="Stacking: โมเดลต่างชนิดในชั้นแรกทายผล แล้วส่งคำทายให้ meta-model ในชั้นที่สอง">
+            <defs><marker id="ah-stack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sv-arrow"/></marker></defs>
+            <rect x="95" y="6" width="110" height="32" rx="4" class="sv-box-strong"/>
+            <text x="150" y="27" text-anchor="middle" class="sv-t">ข้อมูล train</text>
+            <line x1="150" y1="38" x2="56" y2="68" class="sv-link" marker-end="url(#ah-stack)"/>
+            <line x1="150" y1="38" x2="150" y2="68" class="sv-link" marker-end="url(#ah-stack)"/>
+            <line x1="150" y1="38" x2="244" y2="68" class="sv-link" marker-end="url(#ah-stack)"/>
+            <rect x="12" y="70" width="80" height="40" rx="5" class="sv-box"/>
+            <rect x="110" y="70" width="80" height="40" rx="5" class="sv-box"/>
+            <rect x="208" y="70" width="80" height="40" rx="5" class="sv-box"/>
+            <text x="52" y="95" text-anchor="middle" class="sv-t sv-b">kNN</text>
+            <text x="150" y="95" text-anchor="middle" class="sv-t sv-b">SVM</text>
+            <text x="248" y="95" text-anchor="middle" class="sv-t sv-b">Tree</text>
+            <line x1="52" y1="110" x2="118" y2="148" class="sv-link" marker-end="url(#ah-stack)"/>
+            <line x1="150" y1="110" x2="150" y2="148" class="sv-link" marker-end="url(#ah-stack)"/>
+            <line x1="248" y1="110" x2="182" y2="148" class="sv-link" marker-end="url(#ah-stack)"/>
+            <text x="156" y="134" class="sv-t sv-s">คำทาย</text>
+            <rect x="85" y="150" width="130" height="36" rx="5" class="sv-box-pen"/>
+            <text x="150" y="173" text-anchor="middle" class="sv-t sv-pen-t sv-b">Meta-model</text>
+          </svg>
+          <div class="ens-text">
+            <h3>Stacking</h3>
+            <span class="ens-quote">"ต่อกันเป็นขั้นๆ"</span>
+            <p>ชั้นแรกใช้โมเดลหลายชนิดที่ต่างกัน ทายผลออกมา แล้วเอาคำทายทั้งหมดเป็น input ให้โมเดลชั้นที่สอง (meta-model) เรียนรู้ว่าควรเชื่อตัวไหนในสถานการณ์ไหน แล้วตัดสินคำตอบสุดท้าย</p>
+            <span class="ens-meta">ตัวอย่าง: kNN + SVM + Decision Tree แล้วใช้ Logistic Regression เป็น meta-model</span>
+          </div>
+        </div>
+      </div>
+      <div class="take"><span class="take-label">จำสั้นๆ</span><span>Bagging ขนานกันแล้วโหวต · Boosting เรียงกันแก้ข้อผิด · Stacking ซ้อนเป็นชั้น</span></div>
+    </section>
+
+    <div class="part"><span class="part-no">ช่วงที่ 4</span><span class="part-title">สรุปสไลด์ในคาบ</span></div>
+
+    <section id="slides">
+      <h2>สไลด์ในโฟลเดอร์ MSC26</h2>
+      <p>สไลด์ 4 ไฟล์มาจากรายวิชา Data Preparation for ML and AI แบ่งเป็นโมดูลภาพ 2 คาบ และโมดูลข้อความ 2 คาบ ตารางนี้บอกว่าแต่ละไฟล์สอนอะไร และเกี่ยวกับหัวข้อไหนในหน้านี้</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>ไฟล์</th><th>เนื้อหาหลัก</th><th>หัวข้อที่เกี่ยว</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Image · Class 1</b><br><span class="deck">How a Digital Image is Formed</span></td><td style="white-space:normal">กล้องและเซนเซอร์, การเกิดภาพ X-ray อัลตราซาวด์ CT MRI, sampling และ quantization, aliasing, resize และ normalize</td><td style="white-space:normal">ไม่มีในโน้ต เป็นพื้นฐานของ Computer Vision</td></tr>
+            <tr><td><b>Image · Class 2</b><br><span class="deck">Preprocessing Before and During Training</span></td><td style="white-space:normal">filtering, CLAHE, normalize โดยไม่ให้ข้อมูลรั่ว, transfer learning, augmentation ตั้งแต่พลิกภาพจนถึง MixUp</td><td style="white-space:normal"><a href="#folds">การแบ่ง fold</a>, <a href="#dimension">Data Augmentation</a></td></tr>
+            <tr><td><b>Text · Class 1</b><br><span class="deck">Classical Preprocessing</span></td><td style="white-space:normal">Unicode, tokenization, ตัดคำภาษาไทย, stemming และ stop words, bag-of-words, tf-idf, การ augment ข้อความ</td><td style="white-space:normal"><a href="#ai">NLP</a>, <a href="#agentic">บรรทัดที่ตีความไม่ได้</a></td></tr>
+            <tr><td><b>Text · Class 2</b><br><span class="deck">LLM Era Preprocessing</span></td><td style="white-space:normal">tokenizer, การคัดข้อมูลสำหรับ pretraining, instruction data, การตัด chunk สำหรับ RAG, ข้อความทางคลินิก</td><td style="white-space:normal"><a href="#training">Pretraining → RLHF</a>, <a href="#compare">Generative / SFT / RAG</a>, <a href="#vector">Vector DB</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>หัวข้อ ภาพรวม AI, CRISP-DM, การแบ่ง fold แบบคุม X ที่ซ่อนอยู่, SMOTE และ ADASYN, Occam's Razor และ Ensemble ไม่มีใน 4 ไฟล์นี้ ส่วนนั้นในหน้านี้จึงอธิบายจากโน้ตอย่างเดียว ถ้ามีสไลด์ของคาบแรกหรือคาบที่สอนเรื่องเหล่านี้ เพิ่มเข้ามาได้</p>
+      <p>ทุกไฟล์เป็นคาบละ 3 ชั่วโมง แบ่งเป็นช่วงย่อยที่มีรหัส เช่น A1, D2, F3 สรุปด้านล่างเรียงตามรหัสในสไลด์ ส่วน "จำให้ได้" ของ Image 2 และ Text 2 แปลมาจากสไลด์สรุปท้ายคาบที่อาจารย์ให้ไว้ 5 ข้อ ส่วนของ Image 1 และ Text 1 เรียบเรียงจากสไลด์ในคาบ เพราะไม่มีสไลด์สรุปแบบนั้น</p>
+      <div class="tip"><span class="tag-slide">สไลด์</span> อยากอ่านละเอียดทีละหัวข้อ พร้อมภาพประกอบและเดโมที่ลองปรับค่าได้ ดูที่ <a href="https://claude.ai/artifact/6TWaKEf1BmuSpqFhV1VzCs">คู่มือสไลด์ MSC26</a> ซึ่งอธิบายครบทั้ง 37 หัวข้อ พร้อมเลขหน้าในไฟล์ PDF</div>
+    </section>
+
+    <section id="deck-img1">
+      <div class="deck-label">Image · Class 1 · How a Digital Image is Formed</div>
+      <h2>ภาพดิจิทัลเกิดขึ้นได้อย่างไร</h2>
+      <p>ไล่ตั้งแต่แสงเข้ากล้องจนกลายเป็นตัวเลขใน array เพื่อให้รู้ว่าแต่ละพิกเซลมาจากไหนและมีข้อจำกัดอะไร ก่อนจะเริ่มเตรียมข้อมูลภาพจริงในคาบถัดไป</p>
+      <div class="dk-parts">
+        <div class="dk-row"><span class="dk-code">A1</span><div><b>กล้อง pinhole และเลนส์</b> <span>เซนเซอร์อย่างเดียวมองไม่เห็นอะไร ทางยาวโฟกัส ขนาดรูรับแสง และเลนส์ เป็นตัวกำหนดว่าภาพจะมีอะไรอยู่บ้าง</span></div></div>
+        <div class="dk-row"><span class="dk-code">A2</span><div><b>เซนเซอร์รับภาพ</b> <span>แสงกลายเป็นอิเล็กตรอนแล้วเป็นตัวเลข (CCD กับ CMOS) และเหตุผลทางฟิสิกส์ที่ทำให้พิกเซลมี noise ค่าตันเพดาน และไม่เป็นเชิงเส้นพอดี</span></div></div>
+        <div class="dk-row"><span class="dk-code">A3</span><div><b>ภาพทางการแพทย์</b> <span>X-ray อัลตราซาวด์ CT และ MRI ใช้ฟิสิกส์ต่างกันแต่จบที่ array เหมือนกัน ฟิสิกส์เป็นตัวกำหนดว่าความสว่างหมายถึงอะไร และมี noise กับ artifact แบบไหน</span></div></div>
+        <div class="dk-row"><span class="dk-code">A4</span><div><b>Sampling และ quantization</b> <span>พิกเซลคือการสุ่มตัวอย่างจากโลกที่ต่อเนื่อง เก็บด้วยจำนวนบิตที่เลือก เทียบภาพเดียวกันที่ 8, 5, 3 และ 1 บิต และ CT เก็บที่ 12 บิต</span></div></div>
+        <div class="dk-row"><span class="dk-code">A5</span><div><b>Aliasing</b> <span>ย่อภาพแบบทิ้งแถวเว้นแถวจะเกิดลายมัวเร่ที่ไม่มีอยู่จริง วิธีแก้คือเบลอก่อนแล้วค่อยย่อ</span></div></div>
+        <div class="dk-row"><span class="dk-code">B</span><div><b>การเก็บภาพและสี</b> <span>ภาพ grayscale และ RGB ในรูป tensor, ไฟล์ DICOM และ voxel, color space และสิ่งที่กล้องปรับแต่งภาพไปแล้วก่อนเราได้ไฟล์ JPEG</span></div></div>
+        <div class="dk-row"><span class="dk-code">C</span><div><b>การเตรียมภาพขั้นแรก</b> <span>resize และ normalize สองขั้นที่ทุก pipeline ต้องทำ ดูเหมือนง่ายแต่ตัดสินว่าข้อมูลอะไรจะไปถึงโมเดล</span></div></div>
+      </div>
+      <div class="keep">
+        <span class="keep-title">จำให้ได้</span>
+        <ul>
+          <li>ทุกครั้งที่ resize คือการตัดสินใจ บีบภาพให้เป็น 224×224 ทำให้รูปทรงเพี้ยน เติมขอบให้เป็นสี่เหลี่ยมจัตุรัส (letterbox) รักษารูปทรงแต่เปลืองพิกเซล ภาพทางการแพทย์ต้อง resample ให้ระยะห่าง voxel เป็นมิลลิเมตรเท่ากันก่อน</li>
+          <li>CT เก็บค่าเป็น Hounsfield unit ซึ่งเกิน 255 ไปมาก บีบลง 8 บิตตรงๆ จะมองไม่เห็นเนื้อเยื่อ ต้องเลือก window (center, width) ว่าจะเก็บช่วงความเข้มไหนไว้</li>
+          <li>หารด้วย 255 เปลี่ยนแค่หน่วย ส่วน z-score ย้ายศูนย์กลางของข้อมูลไปที่ศูนย์ซึ่ง optimizer ทำงานได้ดี คำถามที่ทิ้งไว้ให้คาบ 2 คือจะใช้ mean และ std ของใคร ซึ่งเป็นเรื่อง data leakage</li>
+          <li>จดตัวเลขทุกอย่างไว้ ทั้งวิธี interpolation ขนาดภาพ สีขอบ และ spacing คนอื่นต้องสร้าง tensor ชุดเดียวกันได้จาก methods section อย่างเดียว</li>
+        </ul>
+      </div>
+      <p class="related">เกี่ยวกับหัวข้อในหน้านี้: <a href="#ai">Computer Vision</a> (ไม่ได้อยู่ในโน้ตโดยตรง)</p>
+    </section>
+
+    <section id="deck-img2">
+      <div class="deck-label">Image · Class 2 · Preprocessing Before and During Training</div>
+      <h2>เตรียมภาพก่อนและระหว่าง train</h2>
+      <p>ต่อจากคาบ 1 เริ่มจากเครื่องมือปรับภาพแบบดั้งเดิม ต่อด้วยการ normalize โดยไม่ให้ข้อมูลรั่ว การใช้โมเดลที่มีคน train มาแล้ว และปิดท้ายด้วย augmentation พร้อมโค้ดจริง</p>
+      <div class="dk-parts">
+        <div class="dk-row"><span class="dk-code">D1</span><div><b>Filtering</b> <span>point operation, convolution, เบลอแบบ Gaussian กับแบบ box kernel ที่เราปรับเองด้วยมือคือสิ่งเดียวกับที่ชั้นแรกของ CNN เรียนรู้เอง</span></div></div>
+        <div class="dk-row"><span class="dk-code">D2</span><div><b>เครื่องมือเดียวกันกับภาพการแพทย์</b> <span>histogram ของ CT ที่บอกโรคปอด, median filter บน X-ray, การลด noise ใน MRI ที่วัดผลด้วย SNR และ CNR</span></div></div>
+        <div class="dk-row"><span class="dk-code">D3</span><div><b>Contrast สี และการ crop</b> <span>histogram equalization, CLAHE, การแปลง color space, การ crop และ padding</span></div></div>
+        <div class="dk-row"><span class="dk-code">E1</span><div><b>เตรียมข้อมูลให้โมเดล</b> <span>zero-center, scaling, ค่าสถิติแยกตามช่องสี และเหตุผลเชิง gradient ว่าทำไม input ที่เป็นบวกล้วนทำให้ train ช้า</span></div></div>
+        <div class="dk-row"><span class="dk-code">E2</span><div><b>กฎสำคัญ</b> <span>fit ค่าสถิติจากส่วน train เท่านั้น และการปรับมาตรฐานความเข้มของภาพ MRI ที่ต่างกันไปทุกเครื่องและทุกครั้งที่สแกน</span></div></div>
+        <div class="dk-row"><span class="dk-code">E3</span><div><b>Transfer learning</b> <span>ยืม weight ของโมเดลที่ train มาแล้ว ก็ต้องยืมวิธีเตรียมข้อมูลของมันมาด้วย</span></div></div>
+        <div class="dk-row"><span class="dk-code">F1</span><div><b>Augmentation</b> <span>ความสุ่มที่เปลี่ยนทุก epoch ได้แก่ flip, crop, color jitter, Cutout และ MixUp</span></div></div>
+        <div class="dk-row"><span class="dk-code">F2</span><div><b>Augmentation ภาพการแพทย์</b> <span>จำลองสิ่งรบกวนจากเครื่องสแกน เช่น ghosting, spike noise, การขยับ, bias field และขอบเขตที่ไม่ควรใช้ MixUp</span></div></div>
+        <div class="dk-row"><span class="dk-code">F3</span><div><b>Pipeline ในโค้ด</b> <span>torchvision v2, Albumentations, Keras preprocessing layers และ MONAI แนวคิดเดียวกันแต่เขียนต่างกัน</span></div></div>
+      </div>
+      <div class="keep">
+        <span class="keep-title">จำให้ได้ · 5 ข้อจากสไลด์สรุปท้ายคาบ</span>
+        <ol>
+          <li>filter แบบดั้งเดิมยังไม่ล้าสมัย มันคือพื้นฐานของสิ่งที่ CNN ชั้นแรกเรียนรู้ และของ artifact ทุกแบบที่เราจะต้องไล่แก้</li>
+          <li>ค่าสถิติทุกตัวที่ใช้เตรียมข้อมูลต้อง fit จากส่วน train แล้วตรึงไว้ ข้อมูลการแพทย์ต้องเพิ่มว่าห้ามข้ามเส้นแบ่งระหว่างคนไข้</li>
+          <li>pretrained backbone เป็นเหมือนสัญญา ต้องใช้ขนาดภาพ ลำดับช่องสี และค่า normalize แบบที่มันถูก train มา ไม่อย่างนั้นข้อดีของมันจะหายไป</li>
+          <li>augmentation คือความสุ่มตอน train ตอนทดสอบต้องปิดหรือเฉลี่ยออก การวัดผลต้องใช้ภาพที่ไม่ได้ดัดแปลงเสมอ</li>
+          <li>pipeline ที่ไม่มีใครรันซ้ำได้ ผลลัพธ์ก็เชื่อถือไม่ได้ seed พารามิเตอร์ และค่าคงที่ต้องอยู่ในโค้ดที่มี version ไม่ใช่อยู่ในความจำ</li>
+        </ol>
+      </div>
+      <p class="related">เกี่ยวกับหัวข้อในหน้านี้: <a href="#folds">การแบ่ง fold</a>, <a href="#dimension">Data Augmentation</a>, <a href="#imbalance">Imbalanced data</a></p>
+    </section>
+
+    <section id="deck-txt1">
+      <div class="deck-label">Text · Class 1 · Classical Preprocessing</div>
+      <h2>การเตรียมข้อความแบบดั้งเดิม และเมื่อไหร่ที่มันทำร้ายโมเดล</h2>
+      <p>จาก byte เป็นคำ จากคำเป็นเวกเตอร์ แนวคิดหลักของคาบนี้คือโมเดลข้อความแบบดั้งเดิมรับแต่ตัวเลขที่ได้จากการนับ การเตรียมข้อมูลจึงเป็นตัวกำหนดว่าอะไรจะถูกนับ เช่น "Pain" กับ "pain," นับเป็นคำเดียวกันไหม และคำว่า "not" ถูกเก็บไว้หรือถูกตัดทิ้ง</p>
+      <div class="dk-parts">
+        <div class="dk-row"><span class="dk-code">A0</span><div><b>ทำไมต้องนับคำ</b> <span>Naive Bayes และ logistic regression เห็น bag of words, n-gram language model เห็นจำนวนลำดับคำ, tf-idf และ BM25 เห็นจำนวนแบบถ่วงน้ำหนัก</span></div></div>
+        <div class="dk-row"><span class="dk-code">A1</span><div><b>คำคืออะไร</b> <span>types กับ tokens, จำนวนคำศัพท์ที่โตไม่หยุด, ภาษาที่ไม่มีเว้นวรรค และคำถามว่าใครเขียนข้อความนี้ เมื่อไหร่ เขียนให้ใคร</span></div></div>
+        <div class="dk-row"><span class="dk-code">A2</span><div><b>ข้อความคือ byte</b> <span>Unicode, UTF-8, normalization form, mojibake (ตัวอักษรเพี้ยนเพราะอ่าน encoding ผิด) และการดึงข้อความออกจาก PDF และ HTML</span></div></div>
+        <div class="dk-row"><span class="dk-code">A3</span><div><b>Tokenization ด้วยกฎ</b> <span>regex, รูปแบบของ Penn Treebank, การตัดประโยค และ spaCy ซึ่งยังใช้อยู่ในทุก pipeline รวมถึงการตัดประโยคสำหรับ RAG</span></div></div>
+        <div class="dk-row"><span class="dk-code">A4</span><div><b>Normalization</b> <span>ตัวพิมพ์เล็กใหญ่, stemming, lemmatization และ stop words ซึ่งเคยช่วยมาก แต่ทิ้งข้อมูลที่โมเดลสมัยใหม่ใช้</span></div></div>
+        <div class="dk-row"><span class="dk-code">A5</span><div><b>ภาษาไทย</b> <span>ตัดคำในภาษาที่ไม่มีเว้นวรรคด้วย PyThaiNLP, คำที่ตัดได้หลายแบบ และการ normalize เฉพาะภาษาไทย</span></div></div>
+        <div class="dk-row"><span class="dk-code">B1</span><div><b>จาก token เป็นเวกเตอร์</b> <span>bag of words และ tf-idf ใน scikit-learn ยังเป็น baseline ที่สร้างได้เร็วที่สุด และยังอยู่ใน retriever แบบ BM25 ที่ป้อนให้ RAG</span></div></div>
+        <div class="dk-row"><span class="dk-code">B2</span><div><b>Augment ข้อความ</b> <span>EDA (สลับ แทน แทรก ลบคำ) และ back-translation (แปลไปภาษาอื่นแล้วแปลกลับ)</span></div></div>
+        <div class="dk-row"><span class="dk-code">C</span><div><b>ข้อความทางคลินิก</b> <span>การจับคำศัพท์ทางการแพทย์, การจับคำปฏิเสธด้วย NegEx, พจนานุกรม UMLS และการลบข้อมูลระบุตัวตนด้วย regex</span></div></div>
+      </div>
+      <div class="keep">
+        <span class="keep-title">จำให้ได้</span>
+        <ul>
+          <li>ยุคเปลี่ยนแล้ว การแปลงเป็นตัวพิมพ์เล็ก ตัด stop word และ stemming ช่วย tf-idf แต่มักทำร้าย transformer เช่น ตัดคำว่า not ทิ้งแล้วความหมายกลับ สิ่งที่ยังควรทำคือแก้ encoding ตัดข้อความซ้ำ และทำให้ข้อความตอน train กับตอนใช้งานเหมือนกัน หลักง่ายๆ คือเตรียมข้อความให้หน้าตาเหมือนข้อมูลที่โมเดลเคยเห็นตอน pretrain</li>
+          <li>ภาษาไทยมีขั้นทำความสะอาดที่ภาษาอื่นไม่มี เช่น พิมพ์สระเอสองตัวแทนสระแอ, เลขไทยปนเลขอารบิก, วรรณยุกต์ซ้ำ, ไม้ยมกและไปยาลน้อย, ตัวอักษรความกว้างศูนย์ (U+200B) ที่มองไม่เห็นแต่ทำให้ตัดคำผิด และปี พ.ศ. ในวันที่</li>
+          <li>โน้ตแพทย์ไทยเขียนไทยปนอังกฤษและเต็มไปด้วยตัวย่อ (U/D, HT, PTA, Dx) ถ้าตัดคำด้วยพจนานุกรมไทยอย่างเดียว คำอย่าง dyspnea จะถูกหั่นเป็นตัวอักษร โน้ตเดียวกันที่ตัดคำต่างกันก็คือ dataset คนละชุด</li>
+          <li>EDA ได้ผลกับชุดข้อมูลเล็ก (หลักร้อยตัวอย่าง) และโมเดลแบบดั้งเดิม แต่แทบไม่ช่วยเมื่อใช้ pretrained transformer</li>
+        </ul>
+      </div>
+      <p class="related">เกี่ยวกับหัวข้อในหน้านี้: <a href="#ai">NLP</a>, <a href="#agentic">บรรทัดที่ตีความไม่ได้</a> (น่าจะหมายถึงคำว่า classical)</p>
+    </section>
+
+    <section id="deck-txt2">
+      <div class="deck-label">Text · Class 2 · LLM Era Preprocessing</div>
+      <h2>การเตรียมข้อความในยุค LLM</h2>
+      <p>ตาม scaling law ผลของ LLM ขึ้นกับสามอย่าง คือขนาดโมเดล พลังประมวลผล และจำนวน token ที่ใช้ train ทีมข้อมูลคุมได้แค่อย่างสุดท้าย คาบนี้จึงตามดู token ตั้งแต่ถูกสร้าง มาจากไหน ถูกคัดอะไรทิ้ง ไปจนถึงชุดข้อมูลขนาดเล็กสำหรับ instruction tuning และการตัด chunk สำหรับ RAG</p>
+      <div class="dk-parts">
+        <div class="dk-row"><span class="dk-code">D0</span><div><b>ทำไมข้อมูลกำหนดสิ่งที่ LLM เรียน</b> <span>scaling laws, ผลของ Chinchilla ที่บอกว่าควรใช้ประมาณ 20 token ต่อ 1 พารามิเตอร์ และการฝึกสามขั้นที่ใช้ข้อมูลสามชุด</span></div></div>
+        <div class="dk-row"><span class="dk-code">D1</span><div><b>Subword tokenization</b> <span>โมเดลเห็นแต่ token ไม่เห็นคำหรือตัวอักษร จึงนับตัว r ใน strawberry ผิด, วิธีทำงานของ BPE และ glitch token ที่ทำให้โมเดลตอบเพี้ยน</span></div></div>
+        <div class="dk-row"><span class="dk-code">D2</span><div><b>ใครจ่ายแพงกว่า</b> <span>tokenizer ที่ train จากข้อความภาษาอังกฤษเป็นหลัก ทำให้ประโยคเดียวกันในภาษาไทยใช้ token มากกว่า 2–4 เท่า ทั้งเปลือง context และค่าใช้จ่าย</span></div></div>
+        <div class="dk-row"><span class="dk-code">E1</span><div><b>ข้อมูล pretraining มาจากไหน</b> <span>Common Crawl, C4, The Pile, หนังสือที่ถูก scrape, คดีลิขสิทธิ์ และสิ่งที่โมเดลจำได้ทั้งข้อความ</span></div></div>
+        <div class="dk-row"><span class="dk-code">E2</span><div><b>ทำความสะอาดระดับเว็บ</b> <span>ตัดข้อมูลซ้ำ 3 ระดับ (ซ้ำตรงทุกตัว ซ้ำแบบคล้ายกัน และใช้โมเดลตัด), กรองคุณภาพด้วยกฎและ classifier, ลบข้อมูลส่วนตัว และผสมข้อมูลหลายแหล่ง</span></div></div>
+        <div class="dk-row"><span class="dk-code">E3</span><div><b>สามการตรวจสอบ</b> <span>ข้อสอบหลุดเข้าไปในข้อมูล train หรือเปล่า (contamination), ข้อความเป็นของใคร และตัวกรองคุณภาพตัดใครทิ้งไปโดยไม่รู้ตัว</span></div></div>
+        <div class="dk-row"><span class="dk-code">F1</span><div><b>Instruction data</b> <span>จาก Alpaca 52,000 คู่ที่โมเดลเขียน ถึง LIMA 1,000 คู่ที่คนคัด, ใครเป็นคนติด label และความเสี่ยงที่โมเดลกินข้อมูลที่โมเดลสร้างจนเสื่อม (model collapse)</span></div></div>
+        <div class="dk-row"><span class="dk-code">F2</span><div><b>เตรียมข้อมูลสำหรับ RAG</b> <span>chunk คือเอกสารแบบใหม่ วิธีตัด แปลงเป็นเวกเตอร์ และทำ index เป็นตัวกำหนดว่าโมเดลจะอ้างอิงอะไรได้บ้าง</span></div></div>
+        <div class="dk-row"><span class="dk-code">F3</span><div><b>ข้อความคลินิกยุคใหม่</b> <span>บริบทสำคัญกว่าการจับคำ เช่น ประโยคที่มีคำว่า Huntington เป็นทั้งชื่อคน ชื่อโรค และชื่อโรงพยาบาล, การลบข้อมูลระบุตัวตนด้วยโมเดล และ PDPA</span></div></div>
+      </div>
+      <div class="keep">
+        <span class="keep-title">จำให้ได้ · 5 ข้อจากสไลด์สรุปท้ายคาบ</span>
+        <ol>
+          <li>tokenizer เป็นส่วนหนึ่งของ dataset มันกำหนดคำศัพท์ ความยาว context และค่าใช้จ่าย และคิดค่าภาษาไทยแพงกว่าภาษาอังกฤษ 2–4 เท่า</li>
+          <li>การเตรียมข้อมูลระดับเว็บคือการลบออก ตัดซ้ำ 3 ระดับ กรองด้วยกฎที่อ่านเข้าใจได้และ classifier ที่ตรวจสอบแล้ว และจดตัวเลขทุกขั้นไว้</li>
+          <li>ค่าสถิติที่ใช้คัดข้อมูลและคะแนนที่ใช้เลือกข้อมูลทุกตัวต้อง fit จากข้อมูลฝั่ง train เท่านั้น benchmark และ validation ห้ามมีผลต่อการคัด</li>
+          <li>ตัวกรองคุณภาพ judge model และข้อมูลสังเคราะห์ ต่างก็มีอคติไปทางใดทางหนึ่ง ก่อนดีใจกับผลที่ดีขึ้นให้เช็กว่าคนกลุ่มไหนหรือภาษาไหนถูกตัดออกไป</li>
+          <li>สำหรับข้อความคลินิกและภาษาไทย การเตรียมข้อมูลเป็นเรื่องกฎหมายด้วย recall ของการลบข้อมูลส่วนตัว PDPA และที่มาของข้อมูล ต้องเขียนไว้ใน methods คู่กับขนาด chunk และเวอร์ชันของ tokenizer</li>
+        </ol>
+      </div>
+      <p class="related">เกี่ยวกับหัวข้อในหน้านี้: <a href="#next-token">LLM เรียนรู้ยังไง</a>, <a href="#training">Pretraining → RLHF</a>, <a href="#compare">Generative / SFT / RAG</a>, <a href="#vector">Vector DB และ top-k</a></p>
+    </section>
+
+    <div class="part"><span class="part-no">ท้ายบท</span><span class="part-title">ทบทวน</span></div>
+
+    <section id="review">
+      <h2>ทบทวนก่อนสอบ</h2>
+      <p>ลองตอบในใจก่อน แล้วค่อยกดดูคำตอบ</p>
+      <div class="quiz">
+        <details><summary>Machine Learning ทำงานได้ดีต้องมีสองอย่างอะไร</summary><p class="ans">ข้อมูล (Data) ที่มากและหลากหลายพอ กับพลังประมวลผล (Compute) ที่แรงพอจะ train ได้</p></details>
+        <details><summary>LLM ถูก pre-train ด้วยโจทย์อะไร</summary><p class="ans">ทายคำถัดไป (next-token prediction) โดยปิดคำสุดท้ายไว้แล้วให้ทาย เลื่อนไปเรื่อยๆ ไม่ต้องมีคนติด label เพราะคำตอบอยู่ในข้อความอยู่แล้ว</p></details>
+        <details><summary>RLHF ต่างจาก SFT ยังไง</summary><p class="ans">SFT สอนจากตัวอย่างคำตอบที่คนเขียนให้ ส่วน RLHF ให้คนให้คะแนนคำตอบที่โมเดลสร้างเอง แล้วฝึกให้โมเดลตอบแบบที่ได้คะแนนสูงบ่อยขึ้น</p></details>
+        <details><summary>ทำไม RAG ช่วยลด hallucination</summary><p class="ans">เพราะค้นเอกสารจริงที่เกี่ยวข้อง (top-k จาก vector database) มาแนบไปกับคำถาม โมเดลตอบจากเอกสารที่อยู่ตรงหน้า ไม่ต้องพึ่งความจำของตัวเองอย่างเดียว</p></details>
+        <details><summary>Agent ต่างจาก RAG ตรงไหน</summary><p class="ans">RAG ค้นครั้งเดียวแล้วตอบ ส่วน Agent ทำหลายขั้น เรียกใช้ tool เอง ดูผล แล้ววนแก้ได้ เช่น เขียนโค้ด → รัน → debug → แก้ จนได้คำตอบ</p></details>
+        <details><summary>"X ที่ซ่อนอยู่" คืออะไร และทำไมต้องคุมตอนแบ่ง fold</summary><p class="ans">คือข้อมูลประกอบที่ไม่ใช่ input หลักและไม่ใช่ y เช่น เครื่องสแกน เพศ อายุ ต้องกระจายเท่ากันทุก fold ไม่อย่างนั้นคะแนนแต่ละ fold จะสะท้อนความต่างของกลุ่ม แทนที่จะสะท้อนความเก่งของโมเดล</p></details>
+        <details><summary>test set ที่แยกไว้ตั้งแต่แรก ใช้ตอนไหน</summary><p class="ans">ใช้ครั้งเดียวตอนท้าย หลังจากเลือกโมเดลแล้วและ train ใหม่ด้วยข้อมูลทุก fold ระหว่างทำ cross-validation ห้ามแตะ</p></details>
+        <details><summary>SMOTE ต่างจาก random over-sampling ยังไง</summary><p class="ans">Over-sampling ก๊อปจุดเดิมซ้ำ ส่วน SMOTE สร้างจุดใหม่บนเส้นระหว่างจุดกลุ่มเล็กกับเพื่อนบ้านที่ใกล้ที่สุด (kNN) จึงได้ข้อมูลที่ไม่ซ้ำของเดิม</p></details>
+        <details><summary>Bagging กับ Boosting ต่างกันยังไง</summary><p class="ans">Bagging train หลายตัวพร้อมกันแยกกันแล้วโหวต ช่วยลด variance ส่วน Boosting train ทีละตัวต่อกัน ตัวหลังแก้ข้อผิดของตัวก่อน ช่วยลด bias</p></details>
+        <details><summary>Occam's Razor บอกว่าอะไร</summary><p class="ans">ถ้าสองวิธีให้ผลพอๆ กัน ให้เลือกวิธีที่ง่ายกว่า</p></details>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">เรียบเรียงจากโน้ตวิชา MSC26 และสไลด์ Data Preparation for ML and AI · ตัวเลขในตัวอย่างเป็นค่าสมมติเพื่ออธิบาย ยกเว้นตัวเลขที่อ้างจากสไลด์ · ส่วนที่ติดป้าย "เพิ่มเติม" ไม่ได้อยู่ในโน้ตหรือสไลด์</div>
+</footer>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('active'); });
+      var a = byId[e.target.id];
+      if (a) a.classList.add('active');
+    });
+  }, { rootMargin: '-15% 0px -75% 0px' });
+  Object.keys(byId).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) io.observe(el);
+  });
+})();
+</script>
